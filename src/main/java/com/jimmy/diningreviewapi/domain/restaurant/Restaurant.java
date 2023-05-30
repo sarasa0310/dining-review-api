@@ -1,4 +1,4 @@
-package com.jimmy.diningreviewapi.domain;
+package com.jimmy.diningreviewapi.domain.restaurant;
 
 import lombok.Getter;
 
@@ -25,6 +25,10 @@ public class Restaurant {
 
     private Restaurant(String name) {
         this.name = name;
+        this.peanutScore = 0;
+        this.eggScore = 0;
+        this.dairyScore = 0;
+        this.averageScore = 0.0;
     }
 
     public static Restaurant of(String name) {
