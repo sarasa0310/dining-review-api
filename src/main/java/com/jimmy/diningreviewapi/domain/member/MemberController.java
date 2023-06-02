@@ -2,10 +2,7 @@ package com.jimmy.diningreviewapi.domain.member;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 
@@ -24,6 +21,32 @@ public class MemberController {
 
         return ResponseEntity.created(
                 URI.create("/members/" + savedMember.getId())).build();
+    }
+
+    @GetMapping
+    ResponseEntity<?> getProfile(@RequestParam String name) {
+        Member foundMember = memberService.findMember(name);
+
+        MemberDto response = MemberDto.from(foundMember);
+
+        return ResponseEntity.ok(response);
+    }
+
+    @PatchMapping
+    ResponseEntity<?> updateProfile(@RequestParam String name,
+                                    @RequestBody MemberUpdateDto memberUpdateDto) {
+        Member updatedMember = memberService.updateMember(name, memberUpdateDto);
+
+        MemberDto response = MemberDto.from(updatedMember);
+
+        return ResponseEntity.ok(response);
+    }
+
+    @DeleteMapping
+    ResponseEntity<?> leave(@RequestParam String name) {
+        memberService.deleteMember(name);
+
+        return ResponseEntity.noContent().build();
     }
 
 }

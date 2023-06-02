@@ -1,6 +1,7 @@
 package com.jimmy.diningreviewapi.domain.member;
 
 import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 
@@ -15,12 +16,18 @@ public class Member {
     @Column(nullable = false, unique = true, updatable = false)
     private String name;
 
+    @Setter
     private String state;
+    @Setter
     private String city;
+    @Setter
     private Integer zipCode;
 
+    @Setter
     private Boolean peanutAllergies;
+    @Setter
     private Boolean eggAllergies;
+    @Setter
     private Boolean dairyAllergies;
 
     protected Member() {
