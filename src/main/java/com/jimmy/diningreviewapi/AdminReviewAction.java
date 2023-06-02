@@ -7,5 +7,5 @@ public class AdminReviewAction {
     public void accept() {
         isAcceptable = true;
     }
-    
+
 }

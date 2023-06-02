@@ -20,6 +20,8 @@ public class DiningReview {
 
     private String comment;
 
+    private Boolean isApproved;
+
     @ManyToOne
     @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
@@ -38,6 +40,7 @@ public class DiningReview {
         this.comment = comment;
         this.restaurant = restaurant;
         this.member = member;
+        this.isApproved = false;
     }
 
     public static DiningReview of(Integer peanutScore, Integer eggScore, Integer dairyScore, String comment, Restaurant restaurant, Member member) {
