@@ -1,0 +1,10 @@
+insert into member (name, state, city, zip_code, peanut_allergies, egg_allergies, dairy_allergies) values ('Katherina Dannatt', 'Colorado', 'Denver', 47, false, true, false);
+insert into member (name, state, city, zip_code, peanut_allergies, egg_allergies, dairy_allergies) values ('Riane Jarret', 'Arkansas', 'Little Rock', 80, true, false, true);
+insert into member (name, state, city, zip_code, peanut_allergies, egg_allergies, dairy_allergies) values ('Justino Possek', 'Ohio', 'Canton', 29, false, true, false);
+insert into member (name, state, city, zip_code, peanut_allergies, egg_allergies, dairy_allergies) values ('Jacquelin Catcherside', 'Oregon', 'Eugene', 80, false, false, true);
+insert into member (name, state, city, zip_code, peanut_allergies, egg_allergies, dairy_allergies) values ('Leona Unwin', 'Virginia', 'Alexandria', 18, false, false, true);
+insert into member (name, state, city, zip_code, peanut_allergies, egg_allergies, dairy_allergies) values ('Adella Rosengart', 'Washington', 'Tacoma', 42, false, true, true);
+insert into member (name, state, city, zip_code, peanut_allergies, egg_allergies, dairy_allergies) values ('Moyna Killiam', 'Maryland', 'Rockville', 52, false, true, false);
+insert into member (name, state, city, zip_code, peanut_allergies, egg_allergies, dairy_allergies) values ('Sofia Madgett', 'New York', 'Brooklyn', 57, true, true, false);
+insert into member (name, state, city, zip_code, peanut_allergies, egg_allergies, dairy_allergies) values ('Lew Hinkens', 'Texas', 'Houston', 78, false, true, true);
+insert into member (name, state, city, zip_code, peanut_allergies, egg_allergies, dairy_allergies) values ('Berke Jahnel', 'Arkansas', 'Little Rock', 46, false, true, true);
