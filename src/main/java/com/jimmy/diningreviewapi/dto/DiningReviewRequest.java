@@ -2,17 +2,15 @@ package com.jimmy.diningreviewapi.dto;
 
 import lombok.Getter;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 
 @Getter
-public final class DiningReviewRequestDto {
+public final class DiningReviewRequest {
 
     @NotBlank
     private String memberName;
-    @NotNull
+
+    @Positive @NotNull
     private Long restaurantId;
 
     @Min(1)@Max(5)

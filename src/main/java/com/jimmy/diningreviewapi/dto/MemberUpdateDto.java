@@ -9,8 +9,8 @@ public final class MemberUpdateDto {
     private String city;
     private Integer zipCode;
 
-    private Boolean peanutAllergies;
-    private Boolean eggAllergies;
-    private Boolean dairyAllergies;
+    private Boolean hasPeanutAllergies;
+    private Boolean hasEggAllergies;
+    private Boolean hasDairyAllergies;
 
 }

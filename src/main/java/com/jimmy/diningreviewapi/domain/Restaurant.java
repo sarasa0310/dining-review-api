@@ -15,20 +15,16 @@ public class Restaurant {
     @Column(nullable = false)
     private String name;
 
-    private Integer peanutScore;
-    private Integer eggScore;
-    private Integer dairyScore;
-    private Double averageScore;
+    private int peanutScore;
+    private int eggScore;
+    private int dairyScore;
+    private double averageScore;
 
     protected Restaurant() {
     }
 
     private Restaurant(String name) {
         this.name = name;
-        this.peanutScore = 0;
-        this.eggScore = 0;
-        this.dairyScore = 0;
-        this.averageScore = 0.0;
     }
 
     public static Restaurant of(String name) {
@@ -36,9 +32,9 @@ public class Restaurant {
     }
 
     public void updateScore(DiningReview review) {
-        this.peanutScore += review.getPeanutScore();
-        this.eggScore += review.getEggScore();
-        this.dairyScore += review.getDairyScore();
+        if (review.getPeanutScore() != null) peanutScore += review.getPeanutScore();
+        if (review.getEggScore() != null) eggScore += review.getEggScore();
+        if (review.getDairyScore() != null) dairyScore += review.getDairyScore();
 
         this.averageScore = calculateAverageScore();
     }

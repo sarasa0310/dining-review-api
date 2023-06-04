@@ -24,27 +24,27 @@ public class Member {
     private Integer zipCode;
 
     @Setter
-    private Boolean peanutAllergies;
+    private Boolean hasPeanutAllergies;
     @Setter
-    private Boolean eggAllergies;
+    private Boolean hasEggAllergies;
     @Setter
-    private Boolean dairyAllergies;
+    private Boolean hasDairyAllergies;
 
     protected Member() {
     }
 
-    private Member(String name, String state, String city, Integer zipCode, Boolean peanutAllergies, Boolean eggAllergies, Boolean dairyAllergies) {
+    private Member(String name, String state, String city, Integer zipCode, Boolean hasPeanutAllergies, Boolean hasEggAllergies, Boolean hasDairyAllergies) {
         this.name = name;
         this.state = state;
         this.city = city;
         this.zipCode = zipCode;
-        this.peanutAllergies = peanutAllergies;
-        this.eggAllergies = eggAllergies;
-        this.dairyAllergies = dairyAllergies;
+        this.hasPeanutAllergies = hasPeanutAllergies;
+        this.hasEggAllergies = hasEggAllergies;
+        this.hasDairyAllergies = hasDairyAllergies;
     }
 
-    public static Member of(String name, String state, String city, Integer zipCode, Boolean peanutAllergies, Boolean eggAllergies, Boolean dairyAllergies) {
-        return new Member(name, state, city, zipCode, peanutAllergies, eggAllergies, dairyAllergies);
+    public static Member of(String name, String state, String city, Integer zipCode, Boolean hasPeanutAllergies, Boolean hasEggAllergies, Boolean hasDairyAllergies) {
+        return new Member(name, state, city, zipCode, hasPeanutAllergies, hasEggAllergies, hasDairyAllergies);
     }
 
 }
