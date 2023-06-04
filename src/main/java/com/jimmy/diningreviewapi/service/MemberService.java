@@ -1,5 +1,8 @@
-package com.jimmy.diningreviewapi.domain.member;
+package com.jimmy.diningreviewapi.service;
 
+import com.jimmy.diningreviewapi.domain.Member;
+import com.jimmy.diningreviewapi.dto.MemberUpdateDto;
+import com.jimmy.diningreviewapi.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

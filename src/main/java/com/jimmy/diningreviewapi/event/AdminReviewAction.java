@@ -1,4 +1,4 @@
-package com.jimmy.diningreviewapi;
+package com.jimmy.diningreviewapi.event;
 
 public class AdminReviewAction {
 

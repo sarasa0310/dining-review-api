@@ -1,7 +1,5 @@
-package com.jimmy.diningreviewapi.domain.diningreview;
+package com.jimmy.diningreviewapi.domain;
 
-import com.jimmy.diningreviewapi.domain.member.Member;
-import com.jimmy.diningreviewapi.domain.restaurant.Restaurant;
 import lombok.Getter;
 
 import javax.persistence.*;

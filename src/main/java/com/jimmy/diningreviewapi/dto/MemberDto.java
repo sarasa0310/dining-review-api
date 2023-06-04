@@ -1,5 +1,6 @@
-package com.jimmy.diningreviewapi.domain.member;
+package com.jimmy.diningreviewapi.dto;
 
+import com.jimmy.diningreviewapi.domain.Member;
 import lombok.Getter;
 
 @Getter

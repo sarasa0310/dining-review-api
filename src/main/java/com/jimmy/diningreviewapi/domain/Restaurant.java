@@ -1,4 +1,4 @@
-package com.jimmy.diningreviewapi.domain.restaurant;
+package com.jimmy.diningreviewapi.domain;
 
 import lombok.Getter;
 
