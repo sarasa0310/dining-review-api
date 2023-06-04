@@ -3,6 +3,8 @@ package com.jimmy.diningreviewapi.service;
 import com.jimmy.diningreviewapi.domain.DiningReview;
 import com.jimmy.diningreviewapi.dto.DiningReviewResponse;
 import com.jimmy.diningreviewapi.event.AdminReviewAction;
+import com.jimmy.diningreviewapi.event.Events;
+import com.jimmy.diningreviewapi.event.ReviewApprovedEvent;
 import com.jimmy.diningreviewapi.repository.DiningReviewRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -34,9 +36,9 @@ public class AdminReviewService {
 
         if (!diningReview.getIsApproved() && action.getIsAcceptable()) {
             diningReview.approve();
+            Events.raise(new ReviewApprovedEvent(diningReview));
         }
 
-        // todo: 레스토랑 점수 반영
         return DiningReviewResponse.from(diningReview);
     }
 
