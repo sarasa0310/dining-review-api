@@ -9,4 +9,6 @@ public interface DiningReviewRepository extends JpaRepository<DiningReview, Long
 
     List<DiningReview> findAllByIsApprovedIsFalse();
 
+    List<DiningReview> findAllByRestaurant_IdAndIsApprovedIsTrue(Long restaurantId);
+
 }

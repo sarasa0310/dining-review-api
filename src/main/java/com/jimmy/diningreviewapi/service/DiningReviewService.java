@@ -4,6 +4,7 @@ import com.jimmy.diningreviewapi.domain.DiningReview;
 import com.jimmy.diningreviewapi.domain.Member;
 import com.jimmy.diningreviewapi.domain.Restaurant;
 import com.jimmy.diningreviewapi.dto.DiningReviewRequestDto;
+import com.jimmy.diningreviewapi.dto.DiningReviewResponse;
 import com.jimmy.diningreviewapi.repository.DiningReviewRepository;
 import com.jimmy.diningreviewapi.repository.RestaurantRepository;
 import lombok.RequiredArgsConstructor;
@@ -11,6 +12,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -36,6 +39,14 @@ public class DiningReviewService {
         );
 
         return diningReviewRepository.save(diningReview);
+    }
+
+    @Transactional(readOnly = true)
+    public List<DiningReviewResponse> findApprovedReviewsOfRestaurant(Long restaurantId) {
+        return diningReviewRepository.findAllByRestaurant_IdAndIsApprovedIsTrue(restaurantId)
+                .stream()
+                .map(DiningReviewResponse::from)
+                .collect(Collectors.toList());
     }
 
 }
