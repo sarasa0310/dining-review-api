@@ -44,7 +44,7 @@ public class MemberService {
         memberRepository.delete(foundMember);
     }
 
-    private Member findExistingMember(String name) {
+    public Member findExistingMember(String name) {
         return memberRepository.findByName(name)
                 .orElseThrow(() -> new EntityNotFoundException("존재하지 않는 회원입니다."));
     }
