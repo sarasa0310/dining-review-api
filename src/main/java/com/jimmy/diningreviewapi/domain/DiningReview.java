@@ -21,11 +21,9 @@ public class DiningReview {
     private Boolean isApproved;
 
     @ManyToOne
-    @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
 
     @ManyToOne
-    @JoinColumn(name = "member_id")
     private Member member;
 
     protected DiningReview() {
