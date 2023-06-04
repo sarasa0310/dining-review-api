@@ -1,11 +1,13 @@
 package com.jimmy.diningreviewapi.event;
 
+import lombok.Getter;
+
+import javax.validation.constraints.NotNull;
+
+@Getter
 public class AdminReviewAction {
 
-    private boolean isAcceptable;
-
-    public void accept() {
-        isAcceptable = true;
-    }
+    @NotNull
+    private Boolean isAcceptable;
 
 }

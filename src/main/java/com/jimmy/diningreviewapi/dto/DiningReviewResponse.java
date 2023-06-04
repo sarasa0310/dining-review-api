@@ -6,18 +6,18 @@ import lombok.Getter;
 @Getter
 public class DiningReviewResponse {
 
-    private Long id;
+    private final Long id;
 
-    private Integer peanutScore;
-    private Integer eggScore;
-    private Integer dairyScore;
+    private final Integer peanutScore;
+    private final Integer eggScore;
+    private final Integer dairyScore;
 
-    private String comment;
+    private final String comment;
 
-    private Boolean isApproved;
+    private final Boolean isApproved;
 
-    private String memberName;
-    private String restaurantName;
+    private final String memberName;
+    private final String restaurantName;
 
     private DiningReviewResponse(Long id, Integer peanutScore, Integer eggScore, Integer dairyScore, String comment, Boolean isApproved, String memberName, String restaurantName) {
         this.id = id;

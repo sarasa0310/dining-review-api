@@ -43,4 +43,8 @@ public class DiningReview {
         return new DiningReview(peanutScore, eggScore, dairyScore, comment, restaurant, member);
     }
 
+    public void approve() {
+        this.isApproved = true;
+    }
+
 }
