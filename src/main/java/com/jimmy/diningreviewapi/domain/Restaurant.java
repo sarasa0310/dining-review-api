@@ -1,4 +1,4 @@
-package com.jimmy.diningreviewapi.domain.restaurant;
+package com.jimmy.diningreviewapi.domain;
 
 import lombok.Getter;
 
@@ -33,6 +33,20 @@ public class Restaurant {
 
     public static Restaurant of(String name) {
         return new Restaurant(name);
+    }
+
+    public void updateScore(DiningReview review) {
+        this.peanutScore += review.getPeanutScore();
+        this.eggScore += review.getEggScore();
+        this.dairyScore += review.getDairyScore();
+
+        this.averageScore = calculateAverageScore();
+    }
+
+    private double calculateAverageScore() {
+        double average = (double) (peanutScore + eggScore + dairyScore) / 3;
+
+        return (double) Math.round(average * 100) / 100;
     }
 
 }

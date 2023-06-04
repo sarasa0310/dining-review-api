@@ -1,5 +1,9 @@
-package com.jimmy.diningreviewapi.domain.member;
+package com.jimmy.diningreviewapi.controller;
 
+import com.jimmy.diningreviewapi.domain.Member;
+import com.jimmy.diningreviewapi.dto.MemberDto;
+import com.jimmy.diningreviewapi.service.MemberService;
+import com.jimmy.diningreviewapi.dto.MemberUpdateDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

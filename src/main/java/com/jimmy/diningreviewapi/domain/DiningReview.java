@@ -1,7 +1,5 @@
-package com.jimmy.diningreviewapi.domain.diningreview;
+package com.jimmy.diningreviewapi.domain;
 
-import com.jimmy.diningreviewapi.domain.member.Member;
-import com.jimmy.diningreviewapi.domain.restaurant.Restaurant;
 import lombok.Getter;
 
 import javax.persistence.*;
@@ -23,11 +21,9 @@ public class DiningReview {
     private Boolean isApproved;
 
     @ManyToOne
-    @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
 
     @ManyToOne
-    @JoinColumn(name = "member_id")
     private Member member;
 
     protected DiningReview() {
@@ -45,6 +41,10 @@ public class DiningReview {
 
     public static DiningReview of(Integer peanutScore, Integer eggScore, Integer dairyScore, String comment, Restaurant restaurant, Member member) {
         return new DiningReview(peanutScore, eggScore, dairyScore, comment, restaurant, member);
+    }
+
+    public void approve() {
+        this.isApproved = true;
     }
 
 }
