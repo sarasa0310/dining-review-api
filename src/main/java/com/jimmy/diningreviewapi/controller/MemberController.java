@@ -1,7 +1,7 @@
 package com.jimmy.diningreviewapi.controller;
 
 import com.jimmy.diningreviewapi.domain.Member;
-import com.jimmy.diningreviewapi.dto.MemberPostDto;
+import com.jimmy.diningreviewapi.dto.MemberDto;
 import com.jimmy.diningreviewapi.service.MemberService;
 import com.jimmy.diningreviewapi.dto.MemberUpdateDto;
 import lombok.RequiredArgsConstructor;
@@ -19,8 +19,8 @@ public class MemberController {
     private final MemberService memberService;
 
     @PostMapping
-    ResponseEntity<?> signUp(@RequestBody @Valid MemberPostDto memberPostDto) {
-        Member member = memberPostDto.toEntity();
+    ResponseEntity<?> signUp(@RequestBody @Valid MemberDto memberDto) {
+        Member member = memberDto.toEntity();
 
         Member savedMember = memberService.saveMember(member);
 
@@ -32,7 +32,7 @@ public class MemberController {
     ResponseEntity<?> getProfile(@RequestParam String name) {
         Member foundMember = memberService.findMember(name);
 
-        MemberPostDto response = MemberPostDto.from(foundMember);
+        MemberDto response = MemberDto.from(foundMember);
 
         return ResponseEntity.ok(response);
     }
@@ -42,7 +42,7 @@ public class MemberController {
                                     @RequestBody MemberUpdateDto memberUpdateDto) {
         Member updatedMember = memberService.updateMember(name, memberUpdateDto);
 
-        MemberPostDto response = MemberPostDto.from(updatedMember);
+        MemberDto response = MemberDto.from(updatedMember);
 
         return ResponseEntity.ok(response);
     }

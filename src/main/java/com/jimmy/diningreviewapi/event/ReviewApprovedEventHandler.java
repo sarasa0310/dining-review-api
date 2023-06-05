@@ -16,6 +16,7 @@ public class ReviewApprovedEventHandler {
 
     private final RestaurantRepository restaurantRepository;
 
+    // todo: RestaurantService 로 이동?
     @EventListener(ReviewApprovedEvent.class)
     public void updateScore(ReviewApprovedEvent event) {
         // todo: restaurantService 메서드로 교체
