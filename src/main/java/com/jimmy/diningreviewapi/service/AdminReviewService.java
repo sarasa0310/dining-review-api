@@ -10,7 +10,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,12 +33,20 @@ public class AdminReviewService {
     public DiningReviewResponse approveDiningReview(Long diningReviewId, AdminReviewAction action) {
         DiningReview diningReview = diningReviewService.findDiningReview(diningReviewId);
 
-        if (!diningReview.isApproved() && action.isAcceptable()) {
+        verifyAlreadyApproved(diningReview);
+
+        if (action.isAcceptable()) {
             diningReview.approve();
             Events.raise(new ReviewApprovedEvent(diningReview));
         }
 
         return DiningReviewResponse.from(diningReview);
+    }
+
+    private void verifyAlreadyApproved(DiningReview diningReview) {
+        if (diningReview.isApproved()) {
+            throw new RuntimeException("이미 승인된 다이닝 리뷰입니다.");
+        }
     }
 
 }
