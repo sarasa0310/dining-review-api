@@ -33,5 +33,9 @@ public class RestaurantController {
         return ResponseEntity.ok(restaurantService.findRestaurantById(restaurantId));
     }
 
+    @GetMapping
+    ResponseEntity<?> getRestaurantsByZipCodeHavingAllergyScore(@RequestParam Integer zipCode) {
+        return ResponseEntity.ok(restaurantService.findRestaurantsByZipCodeHavingAllergyScore(zipCode));
+    }
 
 }

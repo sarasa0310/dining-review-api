@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -24,6 +26,14 @@ public class RestaurantService {
     @Transactional(readOnly = true)
     public Restaurant findRestaurantById(Long restaurantId) {
         return findExistingRestaurant(restaurantId);
+    }
+
+    @Transactional(readOnly = true)
+    public List<Restaurant> findRestaurantsByZipCodeHavingAllergyScore(Integer zipCode) {
+        return restaurantRepository.findAllByZipCodeOrderByIdDesc(zipCode)
+                .stream()
+                .filter(restaurant -> restaurant.getAverageScore() > 0)
+                .collect(Collectors.toList());
     }
 
     private Restaurant findExistingRestaurant(Long restaurantId) {
