@@ -4,4 +4,7 @@ import com.jimmy.diningreviewapi.domain.Restaurant;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface RestaurantRepository extends JpaRepository<Restaurant, Long> {
+
+    boolean existsByNameAndZipCode(String name, Integer zipCode);
+
 }
