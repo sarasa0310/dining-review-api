@@ -32,9 +32,9 @@ public class MemberService {
         if (memberUpdateDto.getState() != null) foundMember.setState(memberUpdateDto.getState());
         if (memberUpdateDto.getCity() != null) foundMember.setCity(memberUpdateDto.getCity());
         if (memberUpdateDto.getZipCode() != null) foundMember.setZipCode(memberUpdateDto.getZipCode());
-        if (memberUpdateDto.getPeanutAllergies() != null) foundMember.setPeanutAllergies(memberUpdateDto.getPeanutAllergies());
-        if (memberUpdateDto.getEggAllergies() != null) foundMember.setEggAllergies(memberUpdateDto.getEggAllergies());
-        if (memberUpdateDto.getDairyAllergies() != null) foundMember.setDairyAllergies(memberUpdateDto.getDairyAllergies());
+        if (memberUpdateDto.getHasPeanutAllergies() != null) foundMember.setHasPeanutAllergies(memberUpdateDto.getHasPeanutAllergies());
+        if (memberUpdateDto.getHasEggAllergies() != null) foundMember.setHasEggAllergies(memberUpdateDto.getHasEggAllergies());
+        if (memberUpdateDto.getHasDairyAllergies() != null) foundMember.setHasDairyAllergies(memberUpdateDto.getHasDairyAllergies());
 
         return foundMember;
     }
@@ -44,7 +44,7 @@ public class MemberService {
         memberRepository.delete(foundMember);
     }
 
-    public Member findExistingMember(String name) {
+    private Member findExistingMember(String name) {
         return memberRepository.findByName(name)
                 .orElseThrow(() -> new EntityNotFoundException("존재하지 않는 회원입니다."));
     }

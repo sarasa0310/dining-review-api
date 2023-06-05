@@ -18,7 +18,7 @@ public class DiningReview {
 
     private String comment;
 
-    private Boolean isApproved;
+    private boolean approved;
 
     @ManyToOne
     private Restaurant restaurant;
@@ -36,7 +36,6 @@ public class DiningReview {
         this.comment = comment;
         this.restaurant = restaurant;
         this.member = member;
-        this.isApproved = false;
     }
 
     public static DiningReview of(Integer peanutScore, Integer eggScore, Integer dairyScore, String comment, Restaurant restaurant, Member member) {
@@ -44,7 +43,7 @@ public class DiningReview {
     }
 
     public void approve() {
-        this.isApproved = true;
+        this.approved = true;
     }
 
 }

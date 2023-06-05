@@ -7,7 +7,6 @@ import javax.validation.constraints.NotNull;
 @Getter
 public class AdminReviewAction {
 
-    @NotNull
-    private Boolean isAcceptable;
+    private boolean acceptable;
 
 }

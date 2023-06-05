@@ -19,22 +19,22 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class AdminReviewService {
 
+    private final DiningReviewService diningReviewService;
+
     private final DiningReviewRepository diningReviewRepository;
 
     @Transactional(readOnly = true)
     public List<DiningReviewResponse> findUnApprovedDiningReviews() {
-        return diningReviewRepository.findAllByIsApprovedIsFalse()
+        return diningReviewRepository.findAllByApprovedIsFalse()
                 .stream()
                 .map(DiningReviewResponse::from)
                 .collect(Collectors.toList());
     }
 
     public DiningReviewResponse approveDiningReview(Long diningReviewId, AdminReviewAction action) {
-        DiningReview diningReview =
-                diningReviewRepository.findById(diningReviewId)
-                        .orElseThrow(() -> new EntityNotFoundException("해당 다이닝 리뷰를 찾을 수 없습니다."));
+        DiningReview diningReview = diningReviewService.findDiningReview(diningReviewId);
 
-        if (!diningReview.getIsApproved() && action.getIsAcceptable()) {
+        if (!diningReview.isApproved() && action.isAcceptable()) {
             diningReview.approve();
             Events.raise(new ReviewApprovedEvent(diningReview));
         }

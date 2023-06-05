@@ -1,7 +1,7 @@
 package com.jimmy.diningreviewapi.controller;
 
 import com.jimmy.diningreviewapi.domain.DiningReview;
-import com.jimmy.diningreviewapi.dto.DiningReviewRequestDto;
+import com.jimmy.diningreviewapi.dto.DiningReviewRequest;
 import com.jimmy.diningreviewapi.service.DiningReviewService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +18,7 @@ public class DiningReviewController {
     private final DiningReviewService diningReviewService;
 
     @PostMapping
-    ResponseEntity<?> submitDiningReview(@Valid @RequestBody DiningReviewRequestDto dto) {
+    ResponseEntity<?> submitDiningReview(@Valid @RequestBody DiningReviewRequest dto) {
         DiningReview submittedDiningReview = diningReviewService.submitDiningReview(dto);
 
         return ResponseEntity.created(
