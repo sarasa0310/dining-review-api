@@ -14,7 +14,7 @@ public class Member {
     private Long id;
 
     @Column(nullable = false, unique = true, updatable = false)
-    private String name;
+    private String name; // todo: 인덱스 추가
 
     @Setter
     private String state;

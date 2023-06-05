@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityNotFoundException;
+
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -17,6 +19,16 @@ public class RestaurantService {
         verifyExistingRestaurant(restaurant.getName(), restaurant.getZipCode());
 
         return restaurantRepository.save(restaurant);
+    }
+
+    @Transactional(readOnly = true)
+    public Restaurant findRestaurantById(Long restaurantId) {
+        return findExistingRestaurant(restaurantId);
+    }
+
+    private Restaurant findExistingRestaurant(Long restaurantId) {
+        return restaurantRepository.findById(restaurantId)
+                .orElseThrow(() -> new EntityNotFoundException("존재하지 않는 레스토랑입니다."));
     }
 
     private void verifyExistingRestaurant(String name, Integer zipCode) {

@@ -6,6 +6,7 @@ import javax.persistence.*;
 
 @Entity
 @Getter
+// todo: name & zipCode 인덱스 추가
 public class Restaurant {
 
     @Id
