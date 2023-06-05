@@ -6,6 +6,7 @@ import javax.persistence.*;
 
 @Entity
 @Getter
+// todo: name & zipCode 인덱스 추가
 public class Restaurant {
 
     @Id
@@ -14,6 +15,8 @@ public class Restaurant {
 
     @Column(nullable = false)
     private String name;
+    @Column(nullable = false)
+    private Integer zipCode;
 
     private int peanutScore;
     private int eggScore;
@@ -23,12 +26,13 @@ public class Restaurant {
     protected Restaurant() {
     }
 
-    private Restaurant(String name) {
+    private Restaurant(String name, Integer zipCode) {
         this.name = name;
+        this.zipCode = zipCode;
     }
 
-    public static Restaurant of(String name) {
-        return new Restaurant(name);
+    public static Restaurant of(String name, Integer zipCode) {
+        return new Restaurant(name, zipCode);
     }
 
     public void updateScore(DiningReview review) {
