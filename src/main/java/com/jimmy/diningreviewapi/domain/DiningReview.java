@@ -18,6 +18,7 @@ public class DiningReview {
 
     private String comment;
 
+    // todo: enum 대기중(waiting), 승인됨(approved), 거절됨(denied) 상태 갖도록 변경
     private boolean approved;
 
     @ManyToOne

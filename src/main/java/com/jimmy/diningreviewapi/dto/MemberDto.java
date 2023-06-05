@@ -6,7 +6,7 @@ import lombok.Getter;
 import javax.validation.constraints.NotBlank;
 
 @Getter
-public final class MemberPostDto {
+public final class MemberDto {
 
     @NotBlank
     private final String name;
@@ -19,7 +19,7 @@ public final class MemberPostDto {
     private final Boolean hasEggAllergies;
     private final Boolean hasDairyAllergies;
 
-    private MemberPostDto(String name, String state, String city, Integer zipCode, Boolean hasPeanutAllergies, Boolean hasEggAllergies, Boolean hasDairyAllergies) {
+    private MemberDto(String name, String state, String city, Integer zipCode, Boolean hasPeanutAllergies, Boolean hasEggAllergies, Boolean hasDairyAllergies) {
         this.name = name;
         this.state = state;
         this.city = city;
@@ -29,12 +29,12 @@ public final class MemberPostDto {
         this.hasDairyAllergies = hasDairyAllergies;
     }
 
-    public static MemberPostDto of(String name, String state, String city, Integer zipCode, Boolean hasPeanutAllergies, Boolean hasEggAllergies, Boolean hasDairyAllergies) {
-        return new MemberPostDto(name, state, city, zipCode, hasPeanutAllergies, hasEggAllergies, hasDairyAllergies);
+    public static MemberDto of(String name, String state, String city, Integer zipCode, Boolean hasPeanutAllergies, Boolean hasEggAllergies, Boolean hasDairyAllergies) {
+        return new MemberDto(name, state, city, zipCode, hasPeanutAllergies, hasEggAllergies, hasDairyAllergies);
     }
 
-    public static MemberPostDto from(Member member) {
-        return MemberPostDto.of(
+    public static MemberDto from(Member member) {
+        return MemberDto.of(
                 member.getName(),
                 member.getState(),
                 member.getCity(),
