@@ -1,8 +1,8 @@
 package com.jimmy.diningreviewapi.service;
 
 import com.jimmy.diningreviewapi.domain.entity.DiningReview;
-import com.jimmy.diningreviewapi.dto.DiningReviewResponse;
-import com.jimmy.diningreviewapi.event.AdminReviewAction;
+import com.jimmy.diningreviewapi.dto.response.DiningReviewResponse;
+import com.jimmy.diningreviewapi.dto.request.AdminReviewAction;
 import com.jimmy.diningreviewapi.event.Events;
 import com.jimmy.diningreviewapi.event.ReviewApprovedEvent;
 import com.jimmy.diningreviewapi.repository.DiningReviewRepository;
