@@ -1,6 +1,6 @@
 package com.jimmy.diningreviewapi.event;
 
-import com.jimmy.diningreviewapi.domain.DiningReview;
+import com.jimmy.diningreviewapi.domain.entity.DiningReview;
 import lombok.Getter;
 
 @Getter

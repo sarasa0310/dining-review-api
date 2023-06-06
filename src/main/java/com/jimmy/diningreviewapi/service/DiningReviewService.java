@@ -1,12 +1,11 @@
 package com.jimmy.diningreviewapi.service;
 
-import com.jimmy.diningreviewapi.domain.DiningReview;
-import com.jimmy.diningreviewapi.domain.Member;
-import com.jimmy.diningreviewapi.domain.Restaurant;
+import com.jimmy.diningreviewapi.domain.entity.DiningReview;
+import com.jimmy.diningreviewapi.domain.entity.Member;
+import com.jimmy.diningreviewapi.domain.entity.Restaurant;
 import com.jimmy.diningreviewapi.dto.DiningReviewRequest;
 import com.jimmy.diningreviewapi.dto.DiningReviewResponse;
 import com.jimmy.diningreviewapi.repository.DiningReviewRepository;
-import com.jimmy.diningreviewapi.repository.RestaurantRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,19 +21,17 @@ public class DiningReviewService {
 
     private final MemberService memberService;
 
-    private final RestaurantRepository restaurantRepository;
+    private final RestaurantService restaurantService;
 
     private final DiningReviewRepository diningReviewRepository;
 
     public DiningReview submitDiningReview(DiningReviewRequest dto) {
-        Member member = memberService.findMember(dto.getMemberName());
+        Member member = memberService.findMemberByName(dto.getMemberName());
 
-        // todo: restaurantService 메서드로 교체
-        Restaurant restaurant = restaurantRepository.findById(dto.getRestaurantId())
-                .orElseThrow(() -> new EntityNotFoundException("해당 레스토랑은 존재하지 않습니다."));
+        Restaurant restaurant = restaurantService.findRestaurantById(dto.getRestaurantId());
 
         DiningReview diningReview = DiningReview.of(
-                dto.getPeanutScore(), dto.getEggScore(), dto.getDairyScore(),
+                dto.getFlavorScore(), dto.getPriceScore(), dto.getServiceScore(),
                 dto.getComment(),
                 restaurant, member
         );
@@ -44,14 +41,14 @@ public class DiningReviewService {
 
     @Transactional(readOnly = true)
     public List<DiningReviewResponse> findApprovedReviewsOfRestaurant(Long restaurantId) {
-        return diningReviewRepository.findAllByApprovedIsTrueAndRestaurant_Id(restaurantId)
+        return diningReviewRepository.findAllByStatusAndRestaurant_Id(DiningReview.Status.APPROVED, restaurantId)
                 .stream()
                 .map(DiningReviewResponse::from)
                 .collect(Collectors.toList());
     }
 
     @Transactional(readOnly = true)
-    public DiningReview findDiningReview(Long diningReviewId) {
+    public DiningReview findDiningReviewById(Long diningReviewId) {
         return diningReviewRepository.findById(diningReviewId)
                 .orElseThrow(() -> new EntityNotFoundException("해당 다이닝 리뷰를 찾을 수 없습니다."));
     }

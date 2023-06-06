@@ -1,6 +1,6 @@
 package com.jimmy.diningreviewapi.controller;
 
-import com.jimmy.diningreviewapi.domain.Restaurant;
+import com.jimmy.diningreviewapi.domain.entity.Restaurant;
 import com.jimmy.diningreviewapi.dto.RestaurantDto;
 import com.jimmy.diningreviewapi.service.RestaurantService;
 import lombok.RequiredArgsConstructor;
@@ -34,8 +34,8 @@ public class RestaurantController {
     }
 
     @GetMapping
-    ResponseEntity<?> getRestaurantsByZipCodeHavingAllergyScore(@RequestParam Integer zipCode) {
-        return ResponseEntity.ok(restaurantService.findRestaurantsByZipCodeHavingAllergyScore(zipCode));
+    ResponseEntity<?> getRestaurantsByZipCodeHavingScore(@RequestParam Integer zipCode) {
+        return ResponseEntity.ok(restaurantService.findRestaurantsByZipCodeHavingScore(zipCode));
     }
 
 }

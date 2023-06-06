@@ -1,6 +1,6 @@
 package com.jimmy.diningreviewapi.controller;
 
-import com.jimmy.diningreviewapi.domain.Member;
+import com.jimmy.diningreviewapi.domain.entity.Member;
 import com.jimmy.diningreviewapi.dto.MemberDto;
 import com.jimmy.diningreviewapi.service.MemberService;
 import com.jimmy.diningreviewapi.dto.MemberUpdateDto;
@@ -30,7 +30,7 @@ public class MemberController {
 
     @GetMapping
     ResponseEntity<?> getProfile(@RequestParam String name) {
-        Member foundMember = memberService.findMember(name);
+        Member foundMember = memberService.findMemberByName(name);
 
         MemberDto response = MemberDto.from(foundMember);
 

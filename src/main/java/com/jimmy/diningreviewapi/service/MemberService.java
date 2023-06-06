@@ -1,6 +1,6 @@
 package com.jimmy.diningreviewapi.service;
 
-import com.jimmy.diningreviewapi.domain.Member;
+import com.jimmy.diningreviewapi.domain.entity.Member;
 import com.jimmy.diningreviewapi.dto.MemberUpdateDto;
 import com.jimmy.diningreviewapi.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +22,7 @@ public class MemberService {
     }
 
     @Transactional(readOnly = true)
-    public Member findMember(String name) {
+    public Member findMemberByName(String name) {
         return findExistingMember(name);
     }
 

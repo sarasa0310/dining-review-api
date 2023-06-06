@@ -1,6 +1,6 @@
 package com.jimmy.diningreviewapi.service;
 
-import com.jimmy.diningreviewapi.domain.Restaurant;
+import com.jimmy.diningreviewapi.domain.entity.Restaurant;
 import com.jimmy.diningreviewapi.repository.RestaurantRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -29,7 +29,7 @@ public class RestaurantService {
     }
 
     @Transactional(readOnly = true)
-    public List<Restaurant> findRestaurantsByZipCodeHavingAllergyScore(Integer zipCode) {
+    public List<Restaurant> findRestaurantsByZipCodeHavingScore(Integer zipCode) {
         return restaurantRepository.findAllByZipCodeOrderByIdDesc(zipCode)
                 .stream()
                 .filter(restaurant -> restaurant.getAverageScore() > 0)

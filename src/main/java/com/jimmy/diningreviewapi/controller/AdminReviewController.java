@@ -19,16 +19,16 @@ public class AdminReviewController {
     private final AdminReviewService adminReviewService;
 
     @GetMapping("/dining-reviews")
-    ResponseEntity<?> getUnApprovedDiningReviews() {
+    ResponseEntity<?> getWaitingDiningReviews() {
         return ResponseEntity.ok(
-                adminReviewService.findUnApprovedDiningReviews());
+                adminReviewService.findWaitingDiningReviews());
     }
 
     @PatchMapping("/dining-reviews/{id}")
-    ResponseEntity<?> approveDiningReview(@PathVariable("id") @Positive Long diningReviewId,
-                                          @RequestBody @Valid AdminReviewAction action) {
+    ResponseEntity<?> approveOrDenyDiningReview(@PathVariable("id") @Positive Long diningReviewId,
+                                                @RequestBody @Valid AdminReviewAction action) {
         return ResponseEntity.ok(
-                adminReviewService.approveDiningReview(diningReviewId, action));
+                adminReviewService.approveOrDenyDiningReview(diningReviewId, action));
     }
 
 }
