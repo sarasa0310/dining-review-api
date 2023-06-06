@@ -14,11 +14,11 @@ public final class DiningReviewRequest {
     private Long restaurantId;
 
     @Min(1)@Max(5)
-    private Integer peanutScore;
+    private Integer flavorScore;
     @Min(1)@Max(5)
-    private Integer eggScore;
+    private Integer priceScore;
     @Min(1)@Max(5)
-    private Integer dairyScore;
+    private Integer serviceScore;
 
     private String comment;
 

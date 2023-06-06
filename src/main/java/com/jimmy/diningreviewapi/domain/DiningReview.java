@@ -15,9 +15,9 @@ public class DiningReview {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Integer peanutScore;
-    private Integer eggScore;
-    private Integer dairyScore;
+    private Integer flavorScore;
+    private Integer priceScore;
+    private Integer serviceScore;
 
     private String comment;
 
@@ -30,17 +30,17 @@ public class DiningReview {
     @ManyToOne
     private Member member;
 
-    private DiningReview(Integer peanutScore, Integer eggScore, Integer dairyScore, String comment, Restaurant restaurant, Member member) {
-        this.peanutScore = peanutScore;
-        this.eggScore = eggScore;
-        this.dairyScore = dairyScore;
+    private DiningReview(Integer flavorScore, Integer priceScore, Integer serviceScore, String comment, Restaurant restaurant, Member member) {
+        this.flavorScore = flavorScore;
+        this.priceScore = priceScore;
+        this.serviceScore = serviceScore;
         this.comment = comment;
         this.restaurant = restaurant;
         this.member = member;
     }
 
-    public static DiningReview of(Integer peanutScore, Integer eggScore, Integer dairyScore, String comment, Restaurant restaurant, Member member) {
-        return new DiningReview(peanutScore, eggScore, dairyScore, comment, restaurant, member);
+    public static DiningReview of(Integer flavorScore, Integer priceScore, Integer serviceScore, String comment, Restaurant restaurant, Member member) {
+        return new DiningReview(flavorScore, priceScore, serviceScore, comment, restaurant, member);
     }
 
     public void approve() {

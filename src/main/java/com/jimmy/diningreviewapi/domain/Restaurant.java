@@ -24,9 +24,9 @@ public class Restaurant {
     @Column(nullable = false)
     private Integer zipCode;
 
-    private int peanutScore;
-    private int eggScore;
-    private int dairyScore;
+    private int flavorScore;
+    private int priceScore;
+    private int serviceScore;
     private double averageScore;
 
     private Restaurant(String name, Integer zipCode) {
@@ -39,15 +39,15 @@ public class Restaurant {
     }
 
     public void updateScore(DiningReview review) {
-        if (review.getPeanutScore() != null) peanutScore += review.getPeanutScore();
-        if (review.getEggScore() != null) eggScore += review.getEggScore();
-        if (review.getDairyScore() != null) dairyScore += review.getDairyScore();
+        if (review.getFlavorScore() != null) flavorScore += review.getFlavorScore();
+        if (review.getPriceScore() != null) priceScore += review.getPriceScore();
+        if (review.getServiceScore() != null) serviceScore += review.getServiceScore();
 
-        this.averageScore = calculateAverageScore();
+        averageScore = calculateAverageScore();
     }
 
     private double calculateAverageScore() {
-        double average = (double) (peanutScore + eggScore + dairyScore) / 3;
+        double average = (double) (flavorScore + priceScore + serviceScore) / 3;
 
         return (double) Math.round(average * 100) / 100;
     }

@@ -11,8 +11,8 @@ insert into member (name, state, city, zip_code, has_peanut_allergies, has_egg_a
 insert into member (name, state, city, zip_code, has_peanut_allergies, has_egg_allergies, has_dairy_allergies) values ('Gustavo Fring', 'Arkansas', 'Little Rock', 46, false, true, true);
 
 -- 테스트용 레스토랑 5개
-insert into restaurant (name, zip_code, peanut_score, egg_score, dairy_score, average_score) values ('마이카츠', 41409, 0, 0, 0, 0.0);
-insert into restaurant (name, zip_code, peanut_score, egg_score, dairy_score, average_score) values ('뭄뭄', 41409, 0, 0, 0, 0.0);
-insert into restaurant (name, zip_code, peanut_score, egg_score, dairy_score, average_score) values ('더포', 41409, 0, 0, 0, 0.0);
-insert into restaurant (name, zip_code, peanut_score, egg_score, dairy_score, average_score) values ('핵밥', 41409, 0, 0, 0, 0.0);
-insert into restaurant (name, zip_code, peanut_score, egg_score, dairy_score, average_score) values ('사랑회', 41409, 0, 0, 0, 0.0);
+insert into restaurant (name, zip_code, flavor_score, price_score, service_score, average_score) values ('마이카츠', 41409, 0, 0, 0, 0.0);
+insert into restaurant (name, zip_code, flavor_score, price_score, service_score, average_score) values ('뭄뭄', 41409, 0, 0, 0, 0.0);
+insert into restaurant (name, zip_code, flavor_score, price_score, service_score, average_score) values ('더포', 41409, 0, 0, 0, 0.0);
+insert into restaurant (name, zip_code, flavor_score, price_score, service_score, average_score) values ('핵밥', 41409, 0, 0, 0, 0.0);
+insert into restaurant (name, zip_code, flavor_score, price_score, service_score, average_score) values ('사랑회', 41409, 0, 0, 0, 0.0);

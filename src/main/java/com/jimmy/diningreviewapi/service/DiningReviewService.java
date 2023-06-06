@@ -34,7 +34,7 @@ public class DiningReviewService {
                 .orElseThrow(() -> new EntityNotFoundException("해당 레스토랑은 존재하지 않습니다."));
 
         DiningReview diningReview = DiningReview.of(
-                dto.getPeanutScore(), dto.getEggScore(), dto.getDairyScore(),
+                dto.getFlavorScore(), dto.getPriceScore(), dto.getServiceScore(),
                 dto.getComment(),
                 restaurant, member
         );
