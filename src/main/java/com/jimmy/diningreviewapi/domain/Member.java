@@ -1,12 +1,15 @@
 package com.jimmy.diningreviewapi.domain;
 
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Member {
 
     @Id
@@ -14,7 +17,7 @@ public class Member {
     private Long id;
 
     @Column(nullable = false, unique = true, updatable = false)
-    private String name; // todo: 인덱스 추가
+    private String name;
 
     @Setter
     private String state;
@@ -29,9 +32,6 @@ public class Member {
     private Boolean hasEggAllergies;
     @Setter
     private Boolean hasDairyAllergies;
-
-    protected Member() {
-    }
 
     private Member(String name, String state, String city, Integer zipCode, Boolean hasPeanutAllergies, Boolean hasEggAllergies, Boolean hasDairyAllergies) {
         this.name = name;

@@ -1,12 +1,18 @@
 package com.jimmy.diningreviewapi.domain;
 
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
-// todo: name & zipCode 인덱스 추가
+@Table(indexes = {
+        @Index(columnList = "name"),
+        @Index(columnList = "zipCode")
+})
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Restaurant {
 
     @Id
@@ -22,9 +28,6 @@ public class Restaurant {
     private int eggScore;
     private int dairyScore;
     private double averageScore;
-
-    protected Restaurant() {
-    }
 
     private Restaurant(String name, Integer zipCode) {
         this.name = name;

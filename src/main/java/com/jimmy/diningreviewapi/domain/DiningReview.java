@@ -1,11 +1,14 @@
 package com.jimmy.diningreviewapi.domain;
 
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class DiningReview {
 
     @Id
@@ -26,9 +29,6 @@ public class DiningReview {
 
     @ManyToOne
     private Member member;
-
-    protected DiningReview() {
-    }
 
     private DiningReview(Integer peanutScore, Integer eggScore, Integer dairyScore, String comment, Restaurant restaurant, Member member) {
         this.peanutScore = peanutScore;
