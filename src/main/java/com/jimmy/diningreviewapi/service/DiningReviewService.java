@@ -41,7 +41,7 @@ public class DiningReviewService {
 
     @Transactional(readOnly = true)
     public List<DiningReviewResponse> findApprovedReviewsOfRestaurant(Long restaurantId) {
-        return diningReviewRepository.findAllByApprovedIsTrueAndRestaurant_Id(restaurantId)
+        return diningReviewRepository.findAllByStatusAndRestaurant_Id(DiningReview.Status.APPROVED, restaurantId)
                 .stream()
                 .map(DiningReviewResponse::from)
                 .collect(Collectors.toList());

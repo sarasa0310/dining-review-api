@@ -14,24 +14,24 @@ public final class DiningReviewResponse {
 
     private final String comment;
 
-    private final boolean approved;
+    private final DiningReview.Status status;
 
     private final String memberName;
     private final String restaurantName;
 
-    private DiningReviewResponse(Long id, Integer flavorScore, Integer priceScore, Integer serviceScore, String comment, boolean approved, String memberName, String restaurantName) {
+    public DiningReviewResponse(Long id, Integer flavorScore, Integer priceScore, Integer serviceScore, String comment, DiningReview.Status status, String memberName, String restaurantName) {
         this.id = id;
         this.flavorScore = flavorScore;
         this.priceScore = priceScore;
         this.serviceScore = serviceScore;
         this.comment = comment;
-        this.approved = approved;
+        this.status = status;
         this.memberName = memberName;
         this.restaurantName = restaurantName;
     }
 
-    public static DiningReviewResponse of(Long id, Integer flavorScore, Integer priceScore, Integer serviceScore, String comment, boolean approved, String memberName, String restaurantName) {
-        return new DiningReviewResponse(id, flavorScore, priceScore, serviceScore, comment, approved, memberName, restaurantName);
+    public static DiningReviewResponse of(Long id, Integer flavorScore, Integer priceScore, Integer serviceScore, String comment, DiningReview.Status status, String memberName, String restaurantName) {
+        return new DiningReviewResponse(id, flavorScore, priceScore, serviceScore, comment, status, memberName, restaurantName);
     }
 
     public static DiningReviewResponse from(DiningReview entity) {
@@ -41,7 +41,7 @@ public final class DiningReviewResponse {
                 entity.getPriceScore(),
                 entity.getServiceScore(),
                 entity.getComment(),
-                entity.isApproved(),
+                entity.getStatus(),
                 entity.getMember().getName(),
                 entity.getRestaurant().getName()
         );

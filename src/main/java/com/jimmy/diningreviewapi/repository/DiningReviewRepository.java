@@ -7,8 +7,7 @@ import java.util.List;
 
 public interface DiningReviewRepository extends JpaRepository<DiningReview, Long> {
 
-    List<DiningReview> findAllByApprovedIsFalse();
-
-    List<DiningReview> findAllByApprovedIsTrueAndRestaurant_Id(Long restaurantId);
+    List<DiningReview> findAllByStatus(DiningReview.Status status);
+    List<DiningReview> findAllByStatusAndRestaurant_Id(DiningReview.Status status, Long restaurantId);
 
 }

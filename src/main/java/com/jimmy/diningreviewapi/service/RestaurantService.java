@@ -29,7 +29,7 @@ public class RestaurantService {
     }
 
     @Transactional(readOnly = true)
-    public List<Restaurant> findRestaurantsByZipCodeHavingAllergyScore(Integer zipCode) {
+    public List<Restaurant> findRestaurantsByZipCodeHavingScore(Integer zipCode) {
         return restaurantRepository.findAllByZipCodeOrderByIdDesc(zipCode)
                 .stream()
                 .filter(restaurant -> restaurant.getAverageScore() > 0)

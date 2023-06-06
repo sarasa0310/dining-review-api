@@ -21,8 +21,12 @@ public class DiningReview {
 
     private String comment;
 
-    // todo: enum 대기중(waiting), 승인됨(approved), 거절됨(denied) 상태 갖도록 변경
-    private boolean approved;
+    @Enumerated(EnumType.STRING)
+    private Status status;
+
+    public enum Status {
+        WAITING, APPROVED, DENIED
+    }
 
     @ManyToOne
     private Restaurant restaurant;
@@ -37,6 +41,7 @@ public class DiningReview {
         this.comment = comment;
         this.restaurant = restaurant;
         this.member = member;
+        this.status = Status.WAITING;
     }
 
     public static DiningReview of(Integer flavorScore, Integer priceScore, Integer serviceScore, String comment, Restaurant restaurant, Member member) {
@@ -44,7 +49,11 @@ public class DiningReview {
     }
 
     public void approve() {
-        this.approved = true;
+        this.status = Status.APPROVED;
+    }
+
+    public void deny() {
+        this.status = Status.DENIED;
     }
 
 }
