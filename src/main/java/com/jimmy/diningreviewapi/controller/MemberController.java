@@ -30,7 +30,7 @@ public class MemberController {
 
     @GetMapping
     ResponseEntity<?> getProfile(@RequestParam String name) {
-        Member foundMember = memberService.findMember(name);
+        Member foundMember = memberService.findMemberByName(name);
 
         MemberDto response = MemberDto.from(foundMember);
 

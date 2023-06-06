@@ -22,7 +22,7 @@ public class MemberService {
     }
 
     @Transactional(readOnly = true)
-    public Member findMember(String name) {
+    public Member findMemberByName(String name) {
         return findExistingMember(name);
     }
 

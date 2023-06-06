@@ -31,7 +31,7 @@ public class AdminReviewService {
     }
 
     public DiningReviewResponse approveDiningReview(Long diningReviewId, AdminReviewAction action) {
-        DiningReview diningReview = diningReviewService.findDiningReview(diningReviewId);
+        DiningReview diningReview = diningReviewService.findDiningReviewById(diningReviewId);
 
         verifyAlreadyApproved(diningReview);
 
