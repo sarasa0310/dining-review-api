@@ -1,6 +1,6 @@
 package com.jimmy.diningreviewapi.service;
 
-import com.jimmy.diningreviewapi.domain.Restaurant;
+import com.jimmy.diningreviewapi.domain.entity.Restaurant;
 import com.jimmy.diningreviewapi.repository.RestaurantRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

@@ -1,8 +1,8 @@
 package com.jimmy.diningreviewapi.service;
 
-import com.jimmy.diningreviewapi.domain.DiningReview;
-import com.jimmy.diningreviewapi.domain.Member;
-import com.jimmy.diningreviewapi.domain.Restaurant;
+import com.jimmy.diningreviewapi.domain.entity.DiningReview;
+import com.jimmy.diningreviewapi.domain.entity.Member;
+import com.jimmy.diningreviewapi.domain.entity.Restaurant;
 import com.jimmy.diningreviewapi.dto.DiningReviewRequest;
 import com.jimmy.diningreviewapi.dto.DiningReviewResponse;
 import com.jimmy.diningreviewapi.repository.DiningReviewRepository;

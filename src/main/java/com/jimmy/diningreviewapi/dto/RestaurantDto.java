@@ -1,6 +1,6 @@
 package com.jimmy.diningreviewapi.dto;
 
-import com.jimmy.diningreviewapi.domain.Restaurant;
+import com.jimmy.diningreviewapi.domain.entity.Restaurant;
 import lombok.Getter;
 
 import javax.validation.constraints.NotBlank;

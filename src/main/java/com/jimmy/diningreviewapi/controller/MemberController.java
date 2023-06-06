@@ -1,6 +1,6 @@
 package com.jimmy.diningreviewapi.controller;
 
-import com.jimmy.diningreviewapi.domain.Member;
+import com.jimmy.diningreviewapi.domain.entity.Member;
 import com.jimmy.diningreviewapi.dto.MemberDto;
 import com.jimmy.diningreviewapi.service.MemberService;
 import com.jimmy.diningreviewapi.dto.MemberUpdateDto;

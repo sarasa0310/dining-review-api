@@ -1,6 +1,6 @@
 package com.jimmy.diningreviewapi.event;
 
-import com.jimmy.diningreviewapi.domain.Restaurant;
+import com.jimmy.diningreviewapi.domain.entity.Restaurant;
 import com.jimmy.diningreviewapi.service.RestaurantService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.event.EventListener;

@@ -1,5 +1,6 @@
-package com.jimmy.diningreviewapi.domain;
+package com.jimmy.diningreviewapi.domain.entity;
 
+import com.jimmy.diningreviewapi.domain.value.Score;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,14 +25,14 @@ public class Restaurant {
     @Column(nullable = false)
     private Integer zipCode;
 
-    private int flavorScore;
-    private int priceScore;
-    private int serviceScore;
+    @Embedded
+    private Score score;
     private double averageScore;
 
     private Restaurant(String name, Integer zipCode) {
         this.name = name;
         this.zipCode = zipCode;
+        this.score = new Score();
     }
 
     public static Restaurant of(String name, Integer zipCode) {
@@ -39,15 +40,21 @@ public class Restaurant {
     }
 
     public void updateScore(DiningReview review) {
-        if (review.getFlavorScore() != null) flavorScore += review.getFlavorScore();
-        if (review.getPriceScore() != null) priceScore += review.getPriceScore();
-        if (review.getServiceScore() != null) serviceScore += review.getServiceScore();
+        if (review.getFlavorScore() != null) {
+            score.setFlavor(score.getFlavor() + review.getFlavorScore());
+        }
+        if (review.getPriceScore() != null) {
+            score.setPrice(score.getPrice() + review.getPriceScore());
+        }
+        if (review.getServiceScore() != null) {
+            score.setService(score.getService() + review.getServiceScore());
+        }
 
         averageScore = calculateAverageScore();
     }
 
     private double calculateAverageScore() {
-        double average = (double) (flavorScore + priceScore + serviceScore) / 3;
+        double average = (double) (score.getFlavor() + score.getPrice() + score.getService()) / 3;
 
         return (double) Math.round(average * 100) / 100;
     }

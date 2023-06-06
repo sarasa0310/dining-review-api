@@ -1,6 +1,6 @@
 package com.jimmy.diningreviewapi.service;
 
-import com.jimmy.diningreviewapi.domain.Member;
+import com.jimmy.diningreviewapi.domain.entity.Member;
 import com.jimmy.diningreviewapi.dto.MemberUpdateDto;
 import com.jimmy.diningreviewapi.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;

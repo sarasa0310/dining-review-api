@@ -1,6 +1,6 @@
 package com.jimmy.diningreviewapi.repository;
 
-import com.jimmy.diningreviewapi.domain.DiningReview;
+import com.jimmy.diningreviewapi.domain.entity.DiningReview;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

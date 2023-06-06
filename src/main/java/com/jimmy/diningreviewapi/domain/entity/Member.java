@@ -1,4 +1,4 @@
-package com.jimmy.diningreviewapi.domain;
+package com.jimmy.diningreviewapi.domain.entity;
 
 import lombok.AccessLevel;
 import lombok.Getter;
