@@ -7,6 +7,9 @@ import com.jimmy.diningreviewapi.event.Events;
 import com.jimmy.diningreviewapi.event.ReviewApprovedEvent;
 import com.jimmy.diningreviewapi.repository.DiningReviewRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,11 +26,9 @@ public class AdminReviewService {
     private final DiningReviewRepository diningReviewRepository;
 
     @Transactional(readOnly = true)
-    public List<DiningReviewResponse> findWaitingDiningReviews() {
-        return diningReviewRepository.findAllByStatus(DiningReview.Status.WAITING)
-                .stream()
-                .map(DiningReviewResponse::from)
-                .collect(Collectors.toList());
+    public Page<DiningReviewResponse> findWaitingDiningReviews(Pageable pageable) {
+        return diningReviewRepository.findAllByStatus(DiningReview.Status.WAITING, pageable)
+                .map(DiningReviewResponse::from);
     }
 
     public DiningReviewResponse approveOrDenyDiningReview(Long diningReviewId, AdminReviewAction action) {

@@ -3,6 +3,8 @@ package com.jimmy.diningreviewapi.controller;
 import com.jimmy.diningreviewapi.dto.request.AdminReviewAction;
 import com.jimmy.diningreviewapi.service.AdminReviewService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -19,9 +21,9 @@ public class AdminReviewController {
     private final AdminReviewService adminReviewService;
 
     @GetMapping
-    ResponseEntity<?> getWaitingDiningReviews() {
+    ResponseEntity<?> getWaitingDiningReviews(@PageableDefault Pageable pageable) {
         return ResponseEntity.ok(
-                adminReviewService.findWaitingDiningReviews());
+                adminReviewService.findWaitingDiningReviews(pageable));
     }
 
     @PatchMapping("/{id}")
