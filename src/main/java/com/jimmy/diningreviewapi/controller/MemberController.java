@@ -1,9 +1,10 @@
 package com.jimmy.diningreviewapi.controller;
 
 import com.jimmy.diningreviewapi.domain.entity.Member;
-import com.jimmy.diningreviewapi.dto.MemberDto;
+import com.jimmy.diningreviewapi.dto.request.SignUpRequest;
+import com.jimmy.diningreviewapi.dto.response.MemberResponse;
 import com.jimmy.diningreviewapi.service.MemberService;
-import com.jimmy.diningreviewapi.dto.MemberUpdateDto;
+import com.jimmy.diningreviewapi.dto.request.MemberUpdate;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,30 +20,33 @@ public class MemberController {
     private final MemberService memberService;
 
     @PostMapping
-    ResponseEntity<?> signUp(@RequestBody @Valid MemberDto memberDto) {
-        Member member = memberDto.toEntity();
+    ResponseEntity<?> signUp(@RequestBody @Valid SignUpRequest signUpRequest) {
+        Member member = signUpRequest.toEntity();
 
         Member savedMember = memberService.saveMember(member);
 
+        MemberResponse response = MemberResponse.from(savedMember);
+
         return ResponseEntity.created(
-                URI.create("/members/" + savedMember.getId())).build();
+                URI.create("/members/" + response.getId()))
+                .body(response);
     }
 
     @GetMapping
     ResponseEntity<?> getProfile(@RequestParam String name) {
         Member foundMember = memberService.findMemberByName(name);
 
-        MemberDto response = MemberDto.from(foundMember);
+        MemberResponse response = MemberResponse.from(foundMember);
 
         return ResponseEntity.ok(response);
     }
 
     @PatchMapping
     ResponseEntity<?> updateProfile(@RequestParam String name,
-                                    @RequestBody MemberUpdateDto memberUpdateDto) {
-        Member updatedMember = memberService.updateMember(name, memberUpdateDto);
+                                    @RequestBody MemberUpdate memberUpdate) {
+        Member updatedMember = memberService.updateMember(name, memberUpdate);
 
-        MemberDto response = MemberDto.from(updatedMember);
+        MemberResponse response = MemberResponse.from(updatedMember);
 
         return ResponseEntity.ok(response);
     }

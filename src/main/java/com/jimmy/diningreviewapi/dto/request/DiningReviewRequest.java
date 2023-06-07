@@ -1,4 +1,4 @@
-package com.jimmy.diningreviewapi.dto;
+package com.jimmy.diningreviewapi.dto.request;
 
 import lombok.Getter;
 

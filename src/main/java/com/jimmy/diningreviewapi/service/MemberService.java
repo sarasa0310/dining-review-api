@@ -1,7 +1,7 @@
 package com.jimmy.diningreviewapi.service;
 
 import com.jimmy.diningreviewapi.domain.entity.Member;
-import com.jimmy.diningreviewapi.dto.MemberUpdateDto;
+import com.jimmy.diningreviewapi.dto.request.MemberUpdate;
 import com.jimmy.diningreviewapi.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -26,15 +26,15 @@ public class MemberService {
         return findExistingMember(name);
     }
 
-    public Member updateMember(String name, MemberUpdateDto memberUpdateDto) {
+    public Member updateMember(String name, MemberUpdate memberUpdate) {
         Member foundMember = findExistingMember(name);
 
-        if (memberUpdateDto.getState() != null) foundMember.setState(memberUpdateDto.getState());
-        if (memberUpdateDto.getCity() != null) foundMember.setCity(memberUpdateDto.getCity());
-        if (memberUpdateDto.getZipCode() != null) foundMember.setZipCode(memberUpdateDto.getZipCode());
-        if (memberUpdateDto.getHasPeanutAllergies() != null) foundMember.setHasPeanutAllergies(memberUpdateDto.getHasPeanutAllergies());
-        if (memberUpdateDto.getHasEggAllergies() != null) foundMember.setHasEggAllergies(memberUpdateDto.getHasEggAllergies());
-        if (memberUpdateDto.getHasDairyAllergies() != null) foundMember.setHasDairyAllergies(memberUpdateDto.getHasDairyAllergies());
+        if (memberUpdate.getState() != null) foundMember.setState(memberUpdate.getState());
+        if (memberUpdate.getCity() != null) foundMember.setCity(memberUpdate.getCity());
+        if (memberUpdate.getZipCode() != null) foundMember.setZipCode(memberUpdate.getZipCode());
+        if (memberUpdate.getHasPeanutAllergies() != null) foundMember.setHasPeanutAllergies(memberUpdate.getHasPeanutAllergies());
+        if (memberUpdate.getHasEggAllergies() != null) foundMember.setHasEggAllergies(memberUpdate.getHasEggAllergies());
+        if (memberUpdate.getHasDairyAllergies() != null) foundMember.setHasDairyAllergies(memberUpdate.getHasDairyAllergies());
 
         return foundMember;
     }
