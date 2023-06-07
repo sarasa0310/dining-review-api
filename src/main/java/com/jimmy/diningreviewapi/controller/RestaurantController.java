@@ -6,12 +6,15 @@ import com.jimmy.diningreviewapi.dto.response.RestaurantResponse;
 import com.jimmy.diningreviewapi.service.RestaurantService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Positive;
 import java.net.URI;
 import java.util.List;
 
+@Validated
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/restaurants")
@@ -33,7 +36,7 @@ public class RestaurantController {
     }
 
     @GetMapping("/{id}")
-    ResponseEntity<?> getRestaurantInfo(@PathVariable("id") Long restaurantId) {
+    ResponseEntity<?> getRestaurantInfo(@PathVariable("id") @Positive Long restaurantId) {
         RestaurantResponse response = RestaurantResponse.from(
                 restaurantService.findRestaurantById(restaurantId));
 
@@ -41,7 +44,7 @@ public class RestaurantController {
     }
 
     @GetMapping
-    ResponseEntity<?> getRestaurantsByZipCodeHavingScore(@RequestParam Integer zipCode) {
+    ResponseEntity<?> getRestaurantsByZipCodeHavingScore(@RequestParam @Positive Integer zipCode) {
         List<RestaurantResponse> responses = restaurantService.findRestaurantsByZipCodeHavingScore(zipCode);
 
         return ResponseEntity.ok(responses);
