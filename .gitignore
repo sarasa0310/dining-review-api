@@ -201,4 +201,6 @@ gradle-app.setting
 # Java heap dump
 *.hprof
 
+dining-review-api-db.mv.db
+
 # End of https://www.toptal.com/developers/gitignore/api/java,gradle,windows,macos,intellij+all
