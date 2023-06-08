@@ -3,7 +3,7 @@
 ### 개요 ✨
 - 레스토랑의 맛, 가격, 서비스를 평가하는 다이닝 리뷰 API 입니다.
 - **Java 11**과 **Spring Boot 2.7.12**을 기반으로 하고 있습니다.
-- **Codecademy** 사이트의 **Create REST APIs with Spring and Java** 코스의 포트폴리오 프로젝트 과제를 기반으로 하고 있습니다. 
+- **Codecademy** 사이트의 [**Create REST APIs with Spring and Java**](https://www.codecademy.com/learn/paths/create-rest-apis-with-spring-and-java) 코스의 포트폴리오 프로젝트 과제를 기반으로 하고 있습니다. 
 - 다만, 주제와 관련하여 약간의 변형(리뷰 항목 변경 등)을 가하였습니다.
 
 <br/>
