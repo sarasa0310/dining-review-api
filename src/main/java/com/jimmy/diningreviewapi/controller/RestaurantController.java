@@ -5,6 +5,8 @@ import com.jimmy.diningreviewapi.dto.request.RestaurantRequest;
 import com.jimmy.diningreviewapi.dto.response.RestaurantResponse;
 import com.jimmy.diningreviewapi.service.RestaurantService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -48,6 +50,12 @@ public class RestaurantController {
         List<RestaurantResponse> responses = restaurantService.findRestaurantsByZipCodeHavingScore(zipCode);
 
         return ResponseEntity.ok(responses);
+    }
+
+    @GetMapping("/ranking")
+    ResponseEntity<?> getRestaurantsRanking(@PageableDefault Pageable pageable) {
+        return ResponseEntity.ok(
+                restaurantService.findRestaurantsRanking(pageable));
     }
 
 }
