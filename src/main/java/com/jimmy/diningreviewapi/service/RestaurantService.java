@@ -4,6 +4,8 @@ import com.jimmy.diningreviewapi.domain.entity.Restaurant;
 import com.jimmy.diningreviewapi.dto.response.RestaurantResponse;
 import com.jimmy.diningreviewapi.repository.RestaurantRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -36,6 +38,12 @@ public class RestaurantService {
                 .filter(restaurant -> restaurant.getAverageScore() > 0)
                 .map(RestaurantResponse::from)
                 .collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
+    public Page<RestaurantResponse> findRestaurantsRanking(Pageable pageable) {
+        return restaurantRepository.findAllByOrderByAverageScoreDesc(pageable)
+                .map(RestaurantResponse::from);
     }
 
     private Restaurant findExistingRestaurant(Long restaurantId) {

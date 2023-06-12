@@ -11,7 +11,8 @@ import javax.persistence.*;
 @Getter
 @Table(indexes = {
         @Index(columnList = "name"),
-        @Index(columnList = "zipCode")
+        @Index(columnList = "zipCode"),
+        @Index(columnList = "averageScore")
 })
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Restaurant {
