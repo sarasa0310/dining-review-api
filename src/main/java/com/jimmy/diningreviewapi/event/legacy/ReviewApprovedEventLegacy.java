@@ -1,14 +1,15 @@
-package com.jimmy.diningreviewapi.event;
+package com.jimmy.diningreviewapi.event.legacy;
 
 import com.jimmy.diningreviewapi.domain.entity.DiningReview;
 import lombok.Getter;
 
 @Getter
-public class ReviewApprovedEvent {
+@Deprecated
+public class ReviewApprovedEventLegacy {
 
     private final DiningReview diningReview;
 
-    public ReviewApprovedEvent(DiningReview diningReview) {
+    public ReviewApprovedEventLegacy(DiningReview diningReview) {
         this.diningReview = diningReview;
     }
 

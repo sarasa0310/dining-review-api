@@ -1,7 +1,8 @@
-package com.jimmy.diningreviewapi.event;
+package com.jimmy.diningreviewapi.event.legacy;
 
 import org.springframework.context.ApplicationEventPublisher;
 
+@Deprecated
 public class Events {
 
     private static ApplicationEventPublisher publisher;
