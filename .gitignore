@@ -202,5 +202,6 @@ gradle-app.setting
 *.hprof
 
 dining-review-api-db.mv.db
+dining-review-api-db.trace.db
 
 # End of https://www.toptal.com/developers/gitignore/api/java,gradle,windows,macos,intellij+all
