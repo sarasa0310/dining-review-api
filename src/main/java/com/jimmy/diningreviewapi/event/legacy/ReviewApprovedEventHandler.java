@@ -1,21 +1,20 @@
-package com.jimmy.diningreviewapi.event;
+package com.jimmy.diningreviewapi.event.legacy;
 
 import com.jimmy.diningreviewapi.domain.entity.Restaurant;
 import com.jimmy.diningreviewapi.service.RestaurantService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.event.EventListener;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-@Service
+//@Service
+@Deprecated
 @Transactional
 @RequiredArgsConstructor
 public class ReviewApprovedEventHandler {
 
     private final RestaurantService restaurantService;
 
-    @EventListener(ReviewApprovedEvent.class)
-    public void updateScore(ReviewApprovedEvent event) {
+//    @EventListener(ReviewApprovedEventLegacy.class)
+    public void updateScore(ReviewApprovedEventLegacy event) {
         Restaurant restaurant = restaurantService.findRestaurantById(
                 event.getDiningReview().getRestaurant().getId());
 

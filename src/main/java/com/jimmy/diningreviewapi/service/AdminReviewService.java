@@ -1,25 +1,23 @@
 package com.jimmy.diningreviewapi.service;
 
 import com.jimmy.diningreviewapi.domain.entity.DiningReview;
-import com.jimmy.diningreviewapi.dto.response.DiningReviewResponse;
 import com.jimmy.diningreviewapi.dto.request.AdminReviewAction;
-import com.jimmy.diningreviewapi.event.Events;
-import com.jimmy.diningreviewapi.event.ReviewApprovedEvent;
+import com.jimmy.diningreviewapi.dto.response.DiningReviewResponse;
+import com.jimmy.diningreviewapi.event.refactor.ReviewApprovedEvent;
 import com.jimmy.diningreviewapi.repository.DiningReviewRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @Transactional
 @RequiredArgsConstructor
 public class AdminReviewService {
+
+    private final ApplicationEventPublisher eventPublisher;
 
     private final DiningReviewService diningReviewService;
 
@@ -39,7 +37,7 @@ public class AdminReviewService {
 
         if (action.isAcceptable()) {
             diningReview.approve();
-            Events.raise(new ReviewApprovedEvent(diningReview));
+            eventPublisher.publishEvent(new ReviewApprovedEvent(diningReview));
         } else {
             diningReview.deny();
         }
