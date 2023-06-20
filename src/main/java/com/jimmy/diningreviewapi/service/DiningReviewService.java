@@ -27,14 +27,9 @@ public class DiningReviewService {
 
     public DiningReview submitDiningReview(DiningReviewRequest dto) {
         Member member = memberService.findMemberByName(dto.getMemberName());
-
         Restaurant restaurant = restaurantService.findRestaurantById(dto.getRestaurantId());
 
-        DiningReview diningReview = DiningReview.of(
-                dto.getFlavorScore(), dto.getPriceScore(), dto.getServiceScore(),
-                dto.getComment(),
-                restaurant, member
-        );
+        DiningReview diningReview = dto.toEntity(restaurant, member);
 
         return diningReviewRepository.save(diningReview);
     }
