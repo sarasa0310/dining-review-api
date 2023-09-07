@@ -38,7 +38,7 @@ public class DiningReviewService {
     public List<DiningReviewResponse> findApprovedReviewsOfRestaurant(Long restaurantId) {
         return diningReviewRepository.findAllByStatusAndRestaurant_Id(DiningReview.Status.APPROVED, restaurantId)
                 .stream()
-                .map(DiningReviewResponse::from)
+                .map(DiningReviewResponse::toResponse)
                 .collect(Collectors.toList());
     }
 

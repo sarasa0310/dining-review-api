@@ -3,15 +3,13 @@ package com.jimmy.diningreviewapi.dto.response;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.jimmy.diningreviewapi.domain.entity.Restaurant;
 import com.jimmy.diningreviewapi.domain.value.Score;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 
-@Getter
-@AllArgsConstructor
+@Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class RestaurantResponse {
 
-    private final Long id;
+    private final Long restaurantId;
 
     private final String name;
     private final Integer zipCode;
@@ -19,13 +17,13 @@ public class RestaurantResponse {
     private final Score score;
     private final double averageScore;
 
-    public static RestaurantResponse from(Restaurant entity) {
+    public static RestaurantResponse toResponse(Restaurant restaurant) {
         return new RestaurantResponse(
-                entity.getId(),
-                entity.getName(),
-                entity.getZipCode(),
-                entity.getScore(),
-                entity.getAverageScore()
+                restaurant.getId(),
+                restaurant.getName(),
+                restaurant.getZipCode(),
+                restaurant.getScore(),
+                restaurant.getAverageScore()
         );
     }
 

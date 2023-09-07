@@ -30,16 +30,16 @@ public class RestaurantController {
 
         Restaurant submittedRestaurant = restaurantService.submitNewRestaurant(restaurant);
 
-        RestaurantResponse response = RestaurantResponse.from(submittedRestaurant);
+        RestaurantResponse response = RestaurantResponse.toResponse(submittedRestaurant);
 
         return ResponseEntity.created(
-                URI.create("/restaurants/" + response.getId()))
+                URI.create("/restaurants/" + response.getRestaurantId()))
                 .body(response);
     }
 
     @GetMapping("/{id}")
     ResponseEntity<?> getRestaurantInfo(@PathVariable("id") @Positive Long restaurantId) {
-        RestaurantResponse response = RestaurantResponse.from(
+        RestaurantResponse response = RestaurantResponse.toResponse(
                 restaurantService.findRestaurantById(restaurantId));
 
         return ResponseEntity.ok(response);

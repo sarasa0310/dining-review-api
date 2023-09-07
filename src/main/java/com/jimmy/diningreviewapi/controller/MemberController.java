@@ -25,10 +25,10 @@ public class MemberController {
 
         Member savedMember = memberService.saveMember(member);
 
-        MemberResponse response = MemberResponse.from(savedMember);
+        MemberResponse response = MemberResponse.toResponse(savedMember);
 
         return ResponseEntity.created(
-                URI.create("/members/" + response.getId()))
+                URI.create("/members/" + response.getMemberId()))
                 .body(response);
     }
 
@@ -36,7 +36,7 @@ public class MemberController {
     ResponseEntity<?> getProfile(@RequestParam String name) {
         Member foundMember = memberService.findMemberByName(name);
 
-        MemberResponse response = MemberResponse.from(foundMember);
+        MemberResponse response = MemberResponse.toResponse(foundMember);
 
         return ResponseEntity.ok(response);
     }
@@ -46,7 +46,7 @@ public class MemberController {
                                     @RequestBody MemberUpdate memberUpdate) {
         Member updatedMember = memberService.updateMember(name, memberUpdate);
 
-        MemberResponse response = MemberResponse.from(updatedMember);
+        MemberResponse response = MemberResponse.toResponse(updatedMember);
 
         return ResponseEntity.ok(response);
     }

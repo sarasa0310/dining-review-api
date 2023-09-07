@@ -25,7 +25,7 @@ public class DiningReviewController {
     ResponseEntity<?> submitDiningReview(@RequestBody @Valid DiningReviewRequest dto) {
         DiningReview submittedDiningReview = diningReviewService.submitDiningReview(dto);
 
-        DiningReviewResponse response = DiningReviewResponse.from(submittedDiningReview);
+        DiningReviewResponse response = DiningReviewResponse.toResponse(submittedDiningReview);
 
         return ResponseEntity.created(
                 URI.create("/dining-reviews/" + submittedDiningReview.getId()))

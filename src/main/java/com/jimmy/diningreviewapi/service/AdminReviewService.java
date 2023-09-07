@@ -26,7 +26,7 @@ public class AdminReviewService {
     @Transactional(readOnly = true)
     public Page<DiningReviewResponse> findWaitingDiningReviews(Pageable pageable) {
         return diningReviewRepository.findAllByStatus(DiningReview.Status.WAITING, pageable)
-                .map(DiningReviewResponse::from);
+                .map(DiningReviewResponse::toResponse);
     }
 
     public DiningReviewResponse approveOrDenyDiningReview(Long diningReviewId, AdminReviewAction action) {
@@ -42,7 +42,7 @@ public class AdminReviewService {
             diningReview.deny();
         }
 
-        return DiningReviewResponse.from(diningReview);
+        return DiningReviewResponse.toResponse(diningReview);
     }
 
     private void verifyAlreadyApproved(DiningReview diningReview) {

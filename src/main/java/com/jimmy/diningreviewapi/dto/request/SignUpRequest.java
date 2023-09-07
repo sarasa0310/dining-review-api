@@ -15,12 +15,12 @@ public final class SignUpRequest {
     private String city;
     private Integer zipCode;
 
-    private Boolean hasPeanutAllergies;
-    private Boolean hasEggAllergies;
-    private Boolean hasDairyAllergies;
+    private Boolean hasPeanutAllergy;
+    private Boolean hasEggAllergy;
+    private Boolean hasDairyAllergy;
 
     public Member toEntity() {
-        return Member.of(name, state, city, zipCode, hasPeanutAllergies, hasEggAllergies, hasDairyAllergies);
+        return new Member(name, state, city, zipCode, hasPeanutAllergy, hasEggAllergy, hasDairyAllergy);
     }
 
 }

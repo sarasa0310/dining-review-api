@@ -16,7 +16,7 @@ public final class RestaurantRequest {
     private Integer zipCode;
 
     public Restaurant toEntity() {
-        return Restaurant.of(name, zipCode);
+        return new Restaurant(name, zipCode);
     }
 
 }

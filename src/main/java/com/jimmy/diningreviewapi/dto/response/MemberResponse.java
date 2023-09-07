@@ -2,35 +2,33 @@ package com.jimmy.diningreviewapi.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.jimmy.diningreviewapi.domain.entity.Member;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 
-@Getter
-@AllArgsConstructor
+@Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public final class MemberResponse {
+public class MemberResponse {
 
-    private final Long id;
+    private final Long memberId;
     private final String name;
 
     private final String state;
     private final String city;
     private final Integer zipCode;
 
-    private final Boolean hasPeanutAllergies;
-    private final Boolean hasEggAllergies;
-    private final Boolean hasDairyAllergies;
+    private final Boolean hasPeanutAllergy;
+    private final Boolean hasEggAllergy;
+    private final Boolean hasDairyAllergy;
 
-    public static MemberResponse from(Member entity) {
+    public static MemberResponse toResponse(Member member) {
         return new MemberResponse(
-                entity.getId(),
-                entity.getName(),
-                entity.getState(),
-                entity.getCity(),
-                entity.getZipCode(),
-                entity.getHasPeanutAllergies(),
-                entity.getHasEggAllergies(),
-                entity.getHasDairyAllergies()
+                member.getId(),
+                member.getName(),
+                member.getState(),
+                member.getCity(),
+                member.getZipCode(),
+                member.hasPeanutAllergy(),
+                member.hasEggAllergy(),
+                member.hasDairyAllergy()
         );
     }
 

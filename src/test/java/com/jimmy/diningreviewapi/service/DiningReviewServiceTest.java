@@ -90,7 +90,7 @@ class DiningReviewServiceTest {
 
         List<DiningReviewResponse> responses =
                 reviews.stream()
-                        .map(DiningReviewResponse::from)
+                        .map(DiningReviewResponse::toResponse)
                         .collect(Collectors.toList());
 
         // when

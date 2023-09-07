@@ -36,14 +36,14 @@ public class RestaurantService {
         return restaurantRepository.findAllByZipCodeOrderByIdDesc(zipCode)
                 .stream()
                 .filter(restaurant -> restaurant.getAverageScore() > 0)
-                .map(RestaurantResponse::from)
+                .map(RestaurantResponse::toResponse)
                 .collect(Collectors.toList());
     }
 
     @Transactional(readOnly = true)
     public Page<RestaurantResponse> findRestaurantsRanking(Pageable pageable) {
         return restaurantRepository.findAllByOrderByAverageScoreDesc(pageable)
-                .map(RestaurantResponse::from);
+                .map(RestaurantResponse::toResponse);
     }
 
     private Restaurant findExistingRestaurant(Long restaurantId) {

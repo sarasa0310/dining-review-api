@@ -6,6 +6,7 @@ import com.jimmy.diningreviewapi.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import javax.persistence.EntityNotFoundException;
 
@@ -29,12 +30,12 @@ public class MemberService {
     public Member updateMember(String name, MemberUpdate memberUpdate) {
         Member foundMember = findExistingMember(name);
 
-        if (memberUpdate.getState() != null) foundMember.setState(memberUpdate.getState());
-        if (memberUpdate.getCity() != null) foundMember.setCity(memberUpdate.getCity());
+        if (StringUtils.hasText(memberUpdate.getState())) foundMember.setState(memberUpdate.getState());
+        if (StringUtils.hasText(memberUpdate.getCity())) foundMember.setCity(memberUpdate.getCity());
         if (memberUpdate.getZipCode() != null) foundMember.setZipCode(memberUpdate.getZipCode());
-        if (memberUpdate.getHasPeanutAllergies() != null) foundMember.setHasPeanutAllergies(memberUpdate.getHasPeanutAllergies());
-        if (memberUpdate.getHasEggAllergies() != null) foundMember.setHasEggAllergies(memberUpdate.getHasEggAllergies());
-        if (memberUpdate.getHasDairyAllergies() != null) foundMember.setHasDairyAllergies(memberUpdate.getHasDairyAllergies());
+        if (memberUpdate.getHasPeanutAllergy() != null) foundMember.setPeanutAllergy(memberUpdate.getHasPeanutAllergy());
+        if (memberUpdate.getHasEggAllergy() != null) foundMember.setEggAllergy(memberUpdate.getHasEggAllergy());
+        if (memberUpdate.getHasDairyAllergy() != null) foundMember.setDairyAllergy(memberUpdate.getHasDairyAllergy());
 
         return foundMember;
     }

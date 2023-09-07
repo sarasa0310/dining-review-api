@@ -54,7 +54,7 @@ class DiningReviewControllerTest {
         given(diningReviewService.submitDiningReview(any(DiningReviewRequest.class)))
                 .willReturn(diningReview);
 
-        DiningReviewResponse response = DiningReviewResponse.from(diningReview);
+        DiningReviewResponse response = DiningReviewResponse.toResponse(diningReview);
 
         // when
         ResultActions actions =
@@ -97,7 +97,7 @@ class DiningReviewControllerTest {
         actions
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$").isArray())
-                .andExpect(jsonPath("$[0].id").value(responses.get(0).getId()))
+                .andExpect(jsonPath("$[0].id").value(responses.get(0).getDiningReviewId()))
                 .andExpect(jsonPath("$[1].memberName").value(responses.get(1).getMemberName()))
                 .andExpect(jsonPath("$[2].restaurantName").value(responses.get(2).getRestaurantName()));
     }
