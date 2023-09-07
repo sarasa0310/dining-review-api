@@ -16,7 +16,7 @@ spring:
     properties:
       hibernate:
         format_sql: true
-#        default_batch_fetch_size: 100
+        default_batch_fetch_size: 100 # 관련 엔티티가 여러 개일 때 in절로 쿼리 최적화
     defer-datasource-initialization: true
 
 logging:
