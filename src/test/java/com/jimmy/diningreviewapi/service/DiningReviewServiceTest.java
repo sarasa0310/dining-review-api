@@ -14,11 +14,13 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.BDDMockito.given;
 
@@ -120,6 +122,20 @@ class DiningReviewServiceTest {
         assertThat(actual).isNotNull();
         assertThat(actual).isInstanceOf(DiningReview.class);
         assertThat(actual.getComment()).isEqualTo(diningReview.getComment());
+    }
+
+    @Test
+    @DisplayName("존재하지 않는 다이닝 리뷰 id를 가지고 조회할 시 예외를 던지는지 테스트")
+    void findDiningReviewByWrongId() {
+        // given
+        Long diningReviewId = 0L;
+
+        given(diningReviewRepository.findById(anyLong()))
+                .willReturn(Optional.empty());
+
+        // then
+        assertThatThrownBy(() -> sut.findDiningReviewById(diningReviewId))
+                .isInstanceOf(EntityNotFoundException.class);
     }
 
 }
