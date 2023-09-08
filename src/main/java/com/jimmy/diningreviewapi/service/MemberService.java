@@ -22,32 +22,27 @@ public class MemberService {
         return memberRepository.save(member);
     }
 
-    @Transactional(readOnly = true)
     public Member findMemberByName(String name) {
-        return findExistingMember(name);
+        return memberRepository.findByName(name)
+                .orElseThrow(() -> new EntityNotFoundException("존재하지 않는 회원입니다."));
     }
 
     public Member updateMember(String name, MemberUpdate memberUpdate) {
-        Member foundMember = findExistingMember(name);
+        Member member = findMemberByName(name);
 
-        if (StringUtils.hasText(memberUpdate.getState())) foundMember.setState(memberUpdate.getState());
-        if (StringUtils.hasText(memberUpdate.getCity())) foundMember.setCity(memberUpdate.getCity());
-        if (memberUpdate.getZipCode() != null) foundMember.setZipCode(memberUpdate.getZipCode());
-        if (memberUpdate.getHasPeanutAllergy() != null) foundMember.setPeanutAllergy(memberUpdate.getHasPeanutAllergy());
-        if (memberUpdate.getHasEggAllergy() != null) foundMember.setEggAllergy(memberUpdate.getHasEggAllergy());
-        if (memberUpdate.getHasDairyAllergy() != null) foundMember.setDairyAllergy(memberUpdate.getHasDairyAllergy());
+        if (StringUtils.hasText(memberUpdate.getState())) member.setState(memberUpdate.getState());
+        if (StringUtils.hasText(memberUpdate.getCity())) member.setCity(memberUpdate.getCity());
+        if (memberUpdate.getZipCode() != null) member.setZipCode(memberUpdate.getZipCode());
+        if (memberUpdate.getHasPeanutAllergy() != null) member.setPeanutAllergy(memberUpdate.getHasPeanutAllergy());
+        if (memberUpdate.getHasEggAllergy() != null) member.setEggAllergy(memberUpdate.getHasEggAllergy());
+        if (memberUpdate.getHasDairyAllergy() != null) member.setDairyAllergy(memberUpdate.getHasDairyAllergy());
 
-        return foundMember;
+        return member;
     }
 
     public void deleteMember(String name) {
-        Member foundMember = findExistingMember(name);
+        Member foundMember = findMemberByName(name);
         memberRepository.delete(foundMember);
-    }
-
-    private Member findExistingMember(String name) {
-        return memberRepository.findByName(name)
-                .orElseThrow(() -> new EntityNotFoundException("존재하지 않는 회원입니다."));
     }
 
     private void verifyExistingMember(String name) {

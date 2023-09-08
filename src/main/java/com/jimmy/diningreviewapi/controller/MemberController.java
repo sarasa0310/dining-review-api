@@ -20,39 +20,35 @@ public class MemberController {
     private final MemberService memberService;
 
     @PostMapping
-    ResponseEntity<?> signUp(@RequestBody @Valid SignUpRequest signUpRequest) {
+    public ResponseEntity<?> signUp(@RequestBody @Valid SignUpRequest signUpRequest) {
         Member member = signUpRequest.toEntity();
 
         Member savedMember = memberService.saveMember(member);
 
-        MemberResponse response = MemberResponse.toResponse(savedMember);
-
         return ResponseEntity.created(
-                URI.create("/members/" + response.getMemberId()))
-                .body(response);
+                URI.create("/members/" + savedMember.getId()))
+                .body(MemberResponse.toResponse(savedMember));
     }
 
     @GetMapping
-    ResponseEntity<?> getProfile(@RequestParam String name) {
+    public ResponseEntity<?> getProfile(@RequestParam String name) {
         Member foundMember = memberService.findMemberByName(name);
 
-        MemberResponse response = MemberResponse.toResponse(foundMember);
-
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(
+                MemberResponse.toResponse(foundMember));
     }
 
     @PatchMapping
-    ResponseEntity<?> updateProfile(@RequestParam String name,
-                                    @RequestBody MemberUpdate memberUpdate) {
+    public ResponseEntity<?> updateProfile(@RequestParam String name,
+                                           @RequestBody @Valid MemberUpdate memberUpdate) {
         Member updatedMember = memberService.updateMember(name, memberUpdate);
 
-        MemberResponse response = MemberResponse.toResponse(updatedMember);
-
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok(
+                MemberResponse.toResponse(updatedMember));
     }
 
     @DeleteMapping
-    ResponseEntity<?> leave(@RequestParam String name) {
+    public ResponseEntity<?> leave(@RequestParam String name) {
         memberService.deleteMember(name);
 
         return ResponseEntity.noContent().build();
