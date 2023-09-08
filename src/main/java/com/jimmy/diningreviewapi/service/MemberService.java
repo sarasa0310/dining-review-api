@@ -23,7 +23,7 @@ public class MemberService {
     }
 
     public Member findMemberByName(String name) {
-        return memberRepository.findByName(name)
+        return memberRepository.findByNameQuerydsl(name)
                 .orElseThrow(() -> new EntityNotFoundException("존재하지 않는 회원입니다."));
     }
 
@@ -46,7 +46,7 @@ public class MemberService {
     }
 
     private void verifyExistingMember(String name) {
-        if (memberRepository.existsByName(name)) {
+        if (memberRepository.existsByNameQuerydsl(name)) {
             throw new RuntimeException("이미 존재하는 회원입니다.");
         }
     }
