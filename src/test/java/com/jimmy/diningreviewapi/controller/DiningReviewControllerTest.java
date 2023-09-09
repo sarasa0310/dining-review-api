@@ -42,9 +42,9 @@ class DiningReviewControllerTest {
     @DisplayName("미승인 다이닝 리뷰 제출 테스트")
     void submitDiningReview() throws Exception {
         // given
-        Member member = Member.of(
+        Member member = new Member(
                 "Willdon Piola", "New Mexico", "Albuquerque", 23625, false, false, false);
-        Restaurant restaurant = Restaurant.of(
+        Restaurant restaurant = new Restaurant(
                 "Becker-Runolfsson", 10510);
 
         DiningReviewRequest request = new DiningReviewRequest(
