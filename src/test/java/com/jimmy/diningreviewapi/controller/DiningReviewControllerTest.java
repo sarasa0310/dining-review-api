@@ -67,7 +67,7 @@ class DiningReviewControllerTest {
         actions
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.memberName").value(response.getMemberName()))
-                .andExpect(jsonPath("$.restaurantName").value(response.getRestaurantName()));
+                .andExpect(jsonPath("$.restaurantName").value(response.getRestaurantId()));
     }
 
     @Test
@@ -99,7 +99,7 @@ class DiningReviewControllerTest {
                 .andExpect(jsonPath("$").isArray())
                 .andExpect(jsonPath("$[0].id").value(responses.get(0).getDiningReviewId()))
                 .andExpect(jsonPath("$[1].memberName").value(responses.get(1).getMemberName()))
-                .andExpect(jsonPath("$[2].restaurantName").value(responses.get(2).getRestaurantName()));
+                .andExpect(jsonPath("$[2].restaurantName").value(responses.get(2).getRestaurantId()));
     }
 
 }

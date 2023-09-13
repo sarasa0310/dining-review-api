@@ -85,7 +85,7 @@ class DiningReviewServiceTest {
                 new DiningReview(5, 5, 5, null, restaurant, member)
         );
 
-        given(diningReviewRepository.findAllByStatusAndRestaurant_Id(any(DiningReview.Status.APPROVED.getDeclaringClass()), anyLong()))
+        given(diningReviewRepository.findByStatusAndRestaurant_Id(any(DiningReview.Status.APPROVED.getDeclaringClass()), anyLong()))
                 .willReturn(reviews);
 
         List<DiningReviewResponse> responses =

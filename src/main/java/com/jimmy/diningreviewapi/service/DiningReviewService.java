@@ -20,9 +20,7 @@ import java.util.stream.Collectors;
 public class DiningReviewService {
 
     private final MemberService memberService;
-
     private final RestaurantService restaurantService;
-
     private final DiningReviewRepository diningReviewRepository;
 
     public DiningReview submitDiningReview(DiningReviewRequest dto) {
@@ -36,7 +34,7 @@ public class DiningReviewService {
 
     @Transactional(readOnly = true)
     public List<DiningReviewResponse> findApprovedReviewsOfRestaurant(Long restaurantId) {
-        return diningReviewRepository.findAllByStatusAndRestaurant_Id(DiningReview.Status.APPROVED, restaurantId)
+        return diningReviewRepository.findByStatusAndRestaurant_Id(DiningReview.Status.APPROVED, restaurantId)
                 .stream()
                 .map(DiningReviewResponse::toResponse)
                 .collect(Collectors.toList());

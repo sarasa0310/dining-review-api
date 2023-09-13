@@ -25,7 +25,7 @@ public class AdminReviewService {
 
     @Transactional(readOnly = true)
     public Page<DiningReviewResponse> findWaitingDiningReviews(Pageable pageable) {
-        return diningReviewRepository.findAllByStatus(DiningReview.Status.WAITING, pageable)
+        return diningReviewRepository.findByStatus(DiningReview.Status.WAITING, pageable)
                 .map(DiningReviewResponse::toResponse);
     }
 

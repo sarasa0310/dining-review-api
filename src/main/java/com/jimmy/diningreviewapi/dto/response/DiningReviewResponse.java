@@ -19,7 +19,7 @@ public class DiningReviewResponse {
     private final DiningReview.Status status;
 
     private final String memberName;
-    private final String restaurantName;
+    private final Long restaurantId;
 
     public static DiningReviewResponse toResponse(DiningReview diningReview) {
         return new DiningReviewResponse(
@@ -30,7 +30,7 @@ public class DiningReviewResponse {
                 diningReview.getComment(),
                 diningReview.getStatus(),
                 diningReview.getMember().getName(),
-                diningReview.getRestaurant().getName());
+                diningReview.getRestaurant().getId());
     }
 
 }
