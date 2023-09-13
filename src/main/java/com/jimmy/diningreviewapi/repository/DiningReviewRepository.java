@@ -16,4 +16,7 @@ public interface DiningReviewRepository extends JpaRepository<DiningReview, Long
     @EntityGraph(attributePaths = {"member", "restaurant"})
     List<DiningReview> findByStatusAndRestaurant_Id(DiningReview.Status status, Long restaurantId);
 
+    @EntityGraph(attributePaths = {"member"})
+    List<DiningReview> findByMember_Id(Long memberId);
+
 }

@@ -41,6 +41,14 @@ public class DiningReviewService {
     }
 
     @Transactional(readOnly = true)
+    public List<DiningReviewResponse> findReviewsOfMember(Long memberId) {
+        return diningReviewRepository.findByMember_Id(memberId)
+                .stream()
+                .map(DiningReviewResponse::toResponse)
+                .collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
     public DiningReview findDiningReviewById(Long diningReviewId) {
         return diningReviewRepository.findById(diningReviewId)
                 .orElseThrow(() -> new EntityNotFoundException("해당 다이닝 리뷰를 찾을 수 없습니다."));

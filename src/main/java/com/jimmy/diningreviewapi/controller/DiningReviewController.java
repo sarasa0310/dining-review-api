@@ -36,4 +36,10 @@ public class DiningReviewController {
                 diningReviewService.findApprovedReviewsOfRestaurant(restaurantId));
     }
 
+    @GetMapping
+    public ResponseEntity<?> findReviewsOfMember(@RequestParam @Positive Long memberId) {
+        return ResponseEntity.ok(
+                diningReviewService.findReviewsOfMember(memberId));
+    }
+
 }
