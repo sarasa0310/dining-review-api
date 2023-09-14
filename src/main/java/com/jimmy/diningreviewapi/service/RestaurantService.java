@@ -48,7 +48,7 @@ public class RestaurantService {
     }
 
     private void verifyExistingRestaurant(String name, Integer zipCode) {
-        if (restaurantRepository.existsByNameAndZipCode(name, zipCode)) {
+        if (restaurantRepository.existsByNameAndZipCodeQuerydsl(name, zipCode)) {
             throw new RuntimeException("이미 등록된 레스토랑입니다.");
         }
     }

@@ -3,6 +3,7 @@ package com.jimmy.diningreviewapi.controller;
 import com.jimmy.diningreviewapi.domain.entity.Restaurant;
 import com.jimmy.diningreviewapi.dto.request.RestaurantRequest;
 import com.jimmy.diningreviewapi.dto.response.RestaurantResponse;
+import com.jimmy.diningreviewapi.repository.RestaurantRepository;
 import com.jimmy.diningreviewapi.service.RestaurantService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
@@ -22,6 +23,7 @@ import java.util.List;
 public class RestaurantController {
 
     private final RestaurantService restaurantService;
+    private final RestaurantRepository restaurantRepository;
 
     @PostMapping
     public ResponseEntity<?> submitNewRestaurant(@RequestBody @Valid RestaurantRequest dto) {
@@ -46,15 +48,26 @@ public class RestaurantController {
 
     @GetMapping
     public ResponseEntity<?> getRestaurantsByZipCodeHavingScore(@RequestParam @Positive Integer zipCode) {
-        List<RestaurantResponse> responses = restaurantService.findRestaurantsByZipCodeHavingScore(zipCode);
+        return ResponseEntity.ok(
+                restaurantService.findRestaurantsByZipCodeHavingScore(zipCode));
+    }
 
-        return ResponseEntity.ok(responses);
+    @GetMapping("/querydsl")
+    public ResponseEntity<?> getRestaurantsByZipCodeHavingScore2(@RequestParam @Positive Integer zipCode) {
+        return ResponseEntity.ok(
+                restaurantRepository.findRestaurantsHavingScore(zipCode));
     }
 
     @GetMapping("/ranking")
     public ResponseEntity<?> getRestaurantsRanking(Pageable pageable) {
         return ResponseEntity.ok(
                 restaurantService.findRestaurantsRanking(pageable));
+    }
+
+    @GetMapping("/ranking/querydsl")
+    public ResponseEntity<?> getRestaurantsRanking2(Pageable pageable) {
+        return ResponseEntity.ok(
+                restaurantRepository.findRestaurantsRanking(pageable));
     }
 
 }
