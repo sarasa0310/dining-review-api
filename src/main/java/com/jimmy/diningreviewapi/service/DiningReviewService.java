@@ -42,7 +42,7 @@ public class DiningReviewService {
 
     @Transactional(readOnly = true)
     public List<DiningReviewResponse> findReviewsOfMember(Long memberId) {
-        return diningReviewRepository.findByMember_Id(memberId)
+        return diningReviewRepository.findByMemberIdQuerydsl(memberId)
                 .stream()
                 .map(DiningReviewResponse::toResponse)
                 .collect(Collectors.toList());

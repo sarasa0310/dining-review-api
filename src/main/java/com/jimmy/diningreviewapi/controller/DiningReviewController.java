@@ -3,6 +3,7 @@ package com.jimmy.diningreviewapi.controller;
 import com.jimmy.diningreviewapi.domain.entity.DiningReview;
 import com.jimmy.diningreviewapi.dto.request.DiningReviewRequest;
 import com.jimmy.diningreviewapi.dto.response.DiningReviewResponse;
+import com.jimmy.diningreviewapi.repository.DiningReviewRepository;
 import com.jimmy.diningreviewapi.service.DiningReviewService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,7 @@ import java.net.URI;
 public class DiningReviewController {
 
     private final DiningReviewService diningReviewService;
+    private final DiningReviewRepository diningReviewRepository;
 
     @PostMapping
     public ResponseEntity<?> submitDiningReview(@RequestBody @Valid DiningReviewRequest dto) {
@@ -34,6 +36,12 @@ public class DiningReviewController {
     public ResponseEntity<?> findApprovedReviewsOfRestaurant(@RequestParam @Positive Long restaurantId) {
         return ResponseEntity.ok(
                 diningReviewService.findApprovedReviewsOfRestaurant(restaurantId));
+    }
+
+    @GetMapping("/approved/querydsl")
+    public ResponseEntity<?> findApprovedReviewsOfRestaurant2(@RequestParam @Positive Long restaurantId) {
+        return ResponseEntity.ok(
+                diningReviewRepository.findByStatusAndRestaurantIdQuerydsl(DiningReview.Status.APPROVED, restaurantId));
     }
 
     @GetMapping

@@ -78,9 +78,9 @@ class DiningReviewControllerTest {
 
         List<DiningReviewResponse> responses =
                 List.of(
-                        new DiningReviewResponse(1L, 1, 1, 1, null, DiningReview.Status.APPROVED, "jimmy", "red"),
-                        new DiningReviewResponse(2L, 1, 3, 5, null, DiningReview.Status.APPROVED, "kim", "blue"),
-                        new DiningReviewResponse(3L, 5, 5, 5, null, DiningReview.Status.APPROVED, "jessie", "while")
+                        new DiningReviewResponse(1L, 1, 1, 1, null, DiningReview.Status.APPROVED, "jimmy", restaurantId),
+                        new DiningReviewResponse(2L, 1, 3, 5, null, DiningReview.Status.APPROVED, "kim", restaurantId),
+                        new DiningReviewResponse(3L, 5, 5, 5, null, DiningReview.Status.APPROVED, "jessie", restaurantId)
                 );
 
         given(diningReviewService.findApprovedReviewsOfRestaurant(anyLong()))
