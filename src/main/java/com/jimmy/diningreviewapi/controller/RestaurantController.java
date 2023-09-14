@@ -6,7 +6,6 @@ import com.jimmy.diningreviewapi.dto.response.RestaurantResponse;
 import com.jimmy.diningreviewapi.service.RestaurantService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +24,7 @@ public class RestaurantController {
     private final RestaurantService restaurantService;
 
     @PostMapping
-    ResponseEntity<?> submitNewRestaurant(@RequestBody @Valid RestaurantRequest dto) {
+    public ResponseEntity<?> submitNewRestaurant(@RequestBody @Valid RestaurantRequest dto) {
         Restaurant restaurant = dto.toEntity();
 
         Restaurant submittedRestaurant = restaurantService.submitNewRestaurant(restaurant);
@@ -37,8 +36,8 @@ public class RestaurantController {
                 .body(response);
     }
 
-    @GetMapping("/{id}")
-    ResponseEntity<?> getRestaurantInfo(@PathVariable("id") @Positive Long restaurantId) {
+    @GetMapping("/{restaurantId}")
+    public ResponseEntity<?> getRestaurantInfo(@PathVariable Long restaurantId) {
         RestaurantResponse response = RestaurantResponse.toResponse(
                 restaurantService.findRestaurantById(restaurantId));
 
@@ -46,14 +45,14 @@ public class RestaurantController {
     }
 
     @GetMapping
-    ResponseEntity<?> getRestaurantsByZipCodeHavingScore(@RequestParam @Positive Integer zipCode) {
+    public ResponseEntity<?> getRestaurantsByZipCodeHavingScore(@RequestParam @Positive Integer zipCode) {
         List<RestaurantResponse> responses = restaurantService.findRestaurantsByZipCodeHavingScore(zipCode);
 
         return ResponseEntity.ok(responses);
     }
 
     @GetMapping("/ranking")
-    ResponseEntity<?> getRestaurantsRanking(@PageableDefault Pageable pageable) {
+    public ResponseEntity<?> getRestaurantsRanking(Pageable pageable) {
         return ResponseEntity.ok(
                 restaurantService.findRestaurantsRanking(pageable));
     }

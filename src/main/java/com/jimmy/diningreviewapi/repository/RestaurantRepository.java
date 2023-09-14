@@ -10,7 +10,7 @@ import java.util.List;
 public interface RestaurantRepository extends JpaRepository<Restaurant, Long> {
 
     boolean existsByNameAndZipCode(String name, Integer zipCode);
-    List<Restaurant> findAllByZipCodeOrderByIdDesc(Integer zipCode);
-    Page<Restaurant> findAllByOrderByAverageScoreDesc(Pageable pageable);
+    List<Restaurant> findByZipCodeOrderByIdDesc(Integer zipCode);
+    Page<Restaurant> findByOrderByAverageScoreDesc(Pageable pageable);
 
 }

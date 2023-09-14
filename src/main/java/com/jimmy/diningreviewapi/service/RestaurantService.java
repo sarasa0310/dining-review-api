@@ -28,12 +28,13 @@ public class RestaurantService {
 
     @Transactional(readOnly = true)
     public Restaurant findRestaurantById(Long restaurantId) {
-        return findExistingRestaurant(restaurantId);
+        return restaurantRepository.findById(restaurantId)
+                .orElseThrow(() -> new EntityNotFoundException("존재하지 않는 레스토랑입니다."));
     }
 
     @Transactional(readOnly = true)
     public List<RestaurantResponse> findRestaurantsByZipCodeHavingScore(Integer zipCode) {
-        return restaurantRepository.findAllByZipCodeOrderByIdDesc(zipCode)
+        return restaurantRepository.findByZipCodeOrderByIdDesc(zipCode)
                 .stream()
                 .filter(restaurant -> restaurant.getAverageScore() > 0)
                 .map(RestaurantResponse::toResponse)
@@ -42,13 +43,8 @@ public class RestaurantService {
 
     @Transactional(readOnly = true)
     public Page<RestaurantResponse> findRestaurantsRanking(Pageable pageable) {
-        return restaurantRepository.findAllByOrderByAverageScoreDesc(pageable)
+        return restaurantRepository.findByOrderByAverageScoreDesc(pageable)
                 .map(RestaurantResponse::toResponse);
-    }
-
-    private Restaurant findExistingRestaurant(Long restaurantId) {
-        return restaurantRepository.findById(restaurantId)
-                .orElseThrow(() -> new EntityNotFoundException("존재하지 않는 레스토랑입니다."));
     }
 
     private void verifyExistingRestaurant(String name, Integer zipCode) {
