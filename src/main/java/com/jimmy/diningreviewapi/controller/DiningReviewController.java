@@ -10,7 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import javax.validation.constraints.Positive;
 import java.net.URI;
 
 @RestController
@@ -33,19 +32,19 @@ public class DiningReviewController {
     }
 
     @GetMapping("/approved")
-    public ResponseEntity<?> findApprovedReviewsOfRestaurant(@RequestParam @Positive Long restaurantId) {
+    public ResponseEntity<?> findApprovedReviewsOfRestaurant(@RequestParam Long restaurantId) {
         return ResponseEntity.ok(
                 diningReviewService.findApprovedReviewsOfRestaurant(restaurantId));
     }
 
     @GetMapping("/approved/querydsl")
-    public ResponseEntity<?> findApprovedReviewsOfRestaurant2(@RequestParam @Positive Long restaurantId) {
+    public ResponseEntity<?> findApprovedReviewsOfRestaurant2(@RequestParam Long restaurantId) {
         return ResponseEntity.ok(
                 diningReviewRepository.findByStatusAndRestaurantIdQuerydsl(DiningReview.Status.APPROVED, restaurantId));
     }
 
     @GetMapping
-    public ResponseEntity<?> findReviewsOfMember(@RequestParam @Positive Long memberId) {
+    public ResponseEntity<?> findReviewsOfMember(@RequestParam Long memberId) {
         return ResponseEntity.ok(
                 diningReviewService.findReviewsOfMember(memberId));
     }
