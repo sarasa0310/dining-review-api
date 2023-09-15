@@ -9,7 +9,9 @@ import java.util.List;
 public interface RestaurantRepositoryCustom {
 
     boolean existsByNameAndZipCodeQuerydsl(String name, Integer zipCode);
+
     List<RestaurantResponse> findRestaurantsHavingScore(Integer zipCode);
+
     Page<RestaurantResponse> findRestaurantsRanking(Pageable pageable);
 
 }
