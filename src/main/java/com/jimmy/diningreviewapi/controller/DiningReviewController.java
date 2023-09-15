@@ -24,21 +24,21 @@ public class DiningReviewController {
     public ResponseEntity<?> submitDiningReview(@RequestBody @Valid DiningReviewRequest dto) {
         DiningReview submittedDiningReview = diningReviewService.submitDiningReview(dto);
 
-        DiningReviewResponse response = DiningReviewResponse.toResponse(submittedDiningReview);
-
         return ResponseEntity.created(
-                URI.create("/dining-reviews/" + response.getDiningReviewId()))
-                .body(response);
+                URI.create("/dining-reviews/" + submittedDiningReview.getId()))
+                .body(DiningReviewResponse.toResponse(submittedDiningReview));
     }
 
+    // 기존 메서드
     @GetMapping("/approved")
-    public ResponseEntity<?> findApprovedReviewsOfRestaurant(@RequestParam Long restaurantId) {
+    public ResponseEntity<?> getApprovedReviewsOfRestaurant(@RequestParam Long restaurantId) {
         return ResponseEntity.ok(
                 diningReviewService.findApprovedReviewsOfRestaurant(restaurantId));
     }
 
+    // QueryDSL 사용 방식
     @GetMapping("/approved/querydsl")
-    public ResponseEntity<?> findApprovedReviewsOfRestaurant2(@RequestParam Long restaurantId) {
+    public ResponseEntity<?> getApprovedReviewsOfRestaurant2(@RequestParam Long restaurantId) {
         return ResponseEntity.ok(
                 diningReviewRepository.findByStatusAndRestaurantIdQuerydsl(DiningReview.Status.APPROVED, restaurantId));
     }

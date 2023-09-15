@@ -19,12 +19,14 @@ public class AdminReviewController {
     private final AdminReviewService adminReviewService;
     private final DiningReviewRepository diningReviewRepository;
 
+    // 기존 메서드
     @GetMapping("/waiting")
     public ResponseEntity<?> getWaitingDiningReviews(Pageable pageable) {
         return ResponseEntity.ok(
                 adminReviewService.findWaitingDiningReviews(pageable));
     }
 
+    // QueryDSL 사용 방식
     @GetMapping("/waiting/querydsl")
     public ResponseEntity<?> getWaitingDiningReviews2(Pageable pageable) {
         return ResponseEntity.ok(

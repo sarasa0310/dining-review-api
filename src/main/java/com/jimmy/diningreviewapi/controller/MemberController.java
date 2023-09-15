@@ -41,8 +41,9 @@ public class MemberController {
                 MemberResponse.toResponse(foundMember));
     }
 
+    // QueryDSL 사용 방식
     @GetMapping("/search")
-    public ResponseEntity<List<MemberResponse>> searchByCity(@RequestParam String city) {
+    public ResponseEntity<?> searchByCity(@RequestParam String city) {
         return ResponseEntity.ok(
                 memberRepository.findMembersByCity(city));
     }

@@ -45,24 +45,28 @@ public class RestaurantController {
         return ResponseEntity.ok(response);
     }
 
+    // 기존 메서드
     @GetMapping
     public ResponseEntity<?> getRestaurantsByZipCodeHavingScore(@RequestParam @Positive Integer zipCode) {
         return ResponseEntity.ok(
                 restaurantService.findRestaurantsByZipCodeHavingScore(zipCode));
     }
 
-    @GetMapping("/querydsl")
-    public ResponseEntity<?> getRestaurantsByZipCodeHavingScore2(@RequestParam @Positive Integer zipCode) {
-        return ResponseEntity.ok(
-                restaurantRepository.findRestaurantsHavingScore(zipCode));
-    }
-
+    // 기존 메서드
     @GetMapping("/ranking")
     public ResponseEntity<?> getRestaurantsRanking(Pageable pageable) {
         return ResponseEntity.ok(
                 restaurantService.findRestaurantsRanking(pageable));
     }
 
+    // QueryDSL 사용 방식
+    @GetMapping("/querydsl")
+    public ResponseEntity<?> getRestaurantsByZipCodeHavingScore2(@RequestParam @Positive Integer zipCode) {
+        return ResponseEntity.ok(
+                restaurantRepository.findRestaurantsHavingScore(zipCode));
+    }
+
+    // QueryDSL 사용 방식
     @GetMapping("/ranking/querydsl")
     public ResponseEntity<?> getRestaurantsRanking2(Pageable pageable) {
         return ResponseEntity.ok(
