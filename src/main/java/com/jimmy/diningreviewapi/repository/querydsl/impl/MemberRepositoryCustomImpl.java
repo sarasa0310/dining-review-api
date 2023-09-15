@@ -1,8 +1,9 @@
-package com.jimmy.diningreviewapi.repository.querydsl;
+package com.jimmy.diningreviewapi.repository.querydsl.impl;
 
 import com.jimmy.diningreviewapi.domain.entity.Member;
 import com.jimmy.diningreviewapi.dto.response.MemberResponse;
 import com.jimmy.diningreviewapi.dto.response.QMemberResponse;
+import com.jimmy.diningreviewapi.repository.querydsl.MemberRepositoryCustom;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
