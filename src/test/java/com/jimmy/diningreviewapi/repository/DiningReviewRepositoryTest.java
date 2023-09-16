@@ -28,7 +28,7 @@ class DiningReviewRepositoryTest {
     @DisplayName("다이닝 리뷰 상태에 따른 다이닝 리뷰 페이지가 리턴되는지 테스트")
     void findAllByStatus(DiningReview.Status status, Pageable pageable) {
         // when
-        Page<DiningReview> diningReviewPage = diningReviewRepository.findAllByStatus(status, pageable);
+        Page<DiningReview> diningReviewPage = diningReviewRepository.findByStatus(status, pageable);
 
         // then
         assertThat(diningReviewPage).isNotEmpty();
@@ -55,7 +55,7 @@ class DiningReviewRepositoryTest {
         DiningReview.Status status = DiningReview.Status.APPROVED;
 
         // when
-        List<DiningReview> diningReviews = diningReviewRepository.findAllByStatusAndRestaurant_Id(status, restaurantId);
+        List<DiningReview> diningReviews = diningReviewRepository.findByStatusAndRestaurant_Id(status, restaurantId);
 
         // then
         assertThat(diningReviews.size()).isEqualTo(1);

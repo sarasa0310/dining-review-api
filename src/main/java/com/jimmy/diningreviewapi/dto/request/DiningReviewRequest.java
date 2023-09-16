@@ -10,7 +10,7 @@ import javax.validation.constraints.*;
 
 @Getter
 @AllArgsConstructor
-public final class DiningReviewRequest {
+public class DiningReviewRequest {
 
     @NotBlank
     private String memberName;
@@ -18,17 +18,17 @@ public final class DiningReviewRequest {
     @Positive @NotNull
     private Long restaurantId;
 
-    @Min(1)@Max(5)
+    @Min(1) @Max(5)
     private Integer flavorScore;
-    @Min(1)@Max(5)
+    @Min(1) @Max(5)
     private Integer priceScore;
-    @Min(1)@Max(5)
+    @Min(1) @Max(5)
     private Integer serviceScore;
 
     private String comment;
 
     public DiningReview toEntity(Restaurant restaurant, Member member) {
-        return DiningReview.of(
+        return new DiningReview(
                 flavorScore,
                 priceScore,
                 serviceScore,

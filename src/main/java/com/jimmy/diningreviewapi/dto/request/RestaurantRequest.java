@@ -8,15 +8,16 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 
 @Getter
-public final class RestaurantRequest {
+public class RestaurantRequest {
 
     @NotBlank
     private String name;
+
     @Positive @NotNull
     private Integer zipCode;
 
     public Restaurant toEntity() {
-        return Restaurant.of(name, zipCode);
+        return new Restaurant(name, zipCode);
     }
 
 }

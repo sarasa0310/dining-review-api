@@ -42,9 +42,9 @@ class DiningReviewServiceTest {
 
     @BeforeAll
     static void initMemberAndRestaurant() {
-        member = Member.of(
+        member = new Member(
                 "Willdon Piola", "New Mexico", "Albuquerque", 23625, false, false, false);
-        restaurant = Restaurant.of(
+        restaurant = new Restaurant(
                 "Becker-Runolfsson", 10510);
     }
 
@@ -80,17 +80,17 @@ class DiningReviewServiceTest {
         Long restaurantId = 1L;
 
         List<DiningReview> reviews = List.of(
-                DiningReview.of(1, 1, 1, null, restaurant, member),
-                DiningReview.of(1, 3, 5, null, restaurant, member),
-                DiningReview.of(5, 5, 5, null, restaurant, member)
+                new DiningReview(1, 1, 1, null, restaurant, member),
+                new DiningReview(1, 3, 5, null, restaurant, member),
+                new DiningReview(5, 5, 5, null, restaurant, member)
         );
 
-        given(diningReviewRepository.findAllByStatusAndRestaurant_Id(any(DiningReview.Status.APPROVED.getDeclaringClass()), anyLong()))
+        given(diningReviewRepository.findByStatusAndRestaurant_Id(any(DiningReview.Status.APPROVED.getDeclaringClass()), anyLong()))
                 .willReturn(reviews);
 
         List<DiningReviewResponse> responses =
                 reviews.stream()
-                        .map(DiningReviewResponse::from)
+                        .map(DiningReviewResponse::toResponse)
                         .collect(Collectors.toList());
 
         // when
@@ -109,7 +109,7 @@ class DiningReviewServiceTest {
         // given
         Long diningReviewId = 1L;
 
-        DiningReview diningReview = DiningReview.of(
+        DiningReview diningReview = new DiningReview(
                 1, 1, 1, "It tastes like shit!", restaurant, member);
 
         given(diningReviewRepository.findById(anyLong()))
