@@ -1,5 +1,6 @@
 package com.jimmy.diningreviewapi.repository.querydsl;
 
+import com.jimmy.diningreviewapi.dto.request.RestaurantSearch;
 import com.jimmy.diningreviewapi.dto.response.RestaurantResponse;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -13,5 +14,7 @@ public interface RestaurantRepositoryCustom {
     List<RestaurantResponse> findRestaurantsHavingScore(Integer zipCode);
 
     Page<RestaurantResponse> findRestaurantsRanking(Pageable pageable);
+
+    Page<RestaurantResponse> searchRestaurants(RestaurantSearch search, Pageable pageable);
 
 }

@@ -2,6 +2,7 @@ package com.jimmy.diningreviewapi.controller;
 
 import com.jimmy.diningreviewapi.domain.entity.Restaurant;
 import com.jimmy.diningreviewapi.dto.request.RestaurantRequest;
+import com.jimmy.diningreviewapi.dto.request.RestaurantSearch;
 import com.jimmy.diningreviewapi.dto.response.RestaurantResponse;
 import com.jimmy.diningreviewapi.repository.RestaurantRepository;
 import com.jimmy.diningreviewapi.service.RestaurantService;
@@ -71,6 +72,12 @@ public class RestaurantController {
     public ResponseEntity<?> getRestaurantsRanking2(Pageable pageable) {
         return ResponseEntity.ok(
                 restaurantRepository.findRestaurantsRanking(pageable));
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<?> searchRestaurants(RestaurantSearch search, Pageable pageable) {
+        return ResponseEntity.ok(
+                restaurantRepository.searchRestaurants(search, pageable));
     }
 
 }
