@@ -2,10 +2,12 @@ package com.jimmy.diningreviewapi.controller;
 
 import com.jimmy.diningreviewapi.domain.entity.DiningReview;
 import com.jimmy.diningreviewapi.dto.request.DiningReviewRequest;
+import com.jimmy.diningreviewapi.dto.request.DiningReviewSearch;
 import com.jimmy.diningreviewapi.dto.response.DiningReviewResponse;
 import com.jimmy.diningreviewapi.repository.DiningReviewRepository;
 import com.jimmy.diningreviewapi.service.DiningReviewService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -47,6 +49,12 @@ public class DiningReviewController {
     public ResponseEntity<?> findReviewsOfMember(@RequestParam Long memberId) {
         return ResponseEntity.ok(
                 diningReviewService.findReviewsOfMember(memberId));
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<?> searchDiningReviews(DiningReviewSearch search, Pageable pageable) {
+        return ResponseEntity.ok(
+                diningReviewRepository.searchDiningReviews(search, pageable));
     }
 
 }
