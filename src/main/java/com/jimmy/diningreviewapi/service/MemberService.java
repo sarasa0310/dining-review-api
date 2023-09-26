@@ -6,6 +6,7 @@ import com.jimmy.diningreviewapi.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import javax.persistence.EntityNotFoundException;
 
@@ -21,36 +22,31 @@ public class MemberService {
         return memberRepository.save(member);
     }
 
-    @Transactional(readOnly = true)
     public Member findMemberByName(String name) {
-        return findExistingMember(name);
-    }
-
-    public Member updateMember(String name, MemberUpdate memberUpdate) {
-        Member foundMember = findExistingMember(name);
-
-        if (memberUpdate.getState() != null) foundMember.setState(memberUpdate.getState());
-        if (memberUpdate.getCity() != null) foundMember.setCity(memberUpdate.getCity());
-        if (memberUpdate.getZipCode() != null) foundMember.setZipCode(memberUpdate.getZipCode());
-        if (memberUpdate.getHasPeanutAllergies() != null) foundMember.setHasPeanutAllergies(memberUpdate.getHasPeanutAllergies());
-        if (memberUpdate.getHasEggAllergies() != null) foundMember.setHasEggAllergies(memberUpdate.getHasEggAllergies());
-        if (memberUpdate.getHasDairyAllergies() != null) foundMember.setHasDairyAllergies(memberUpdate.getHasDairyAllergies());
-
-        return foundMember;
-    }
-
-    public void deleteMember(String name) {
-        Member foundMember = findExistingMember(name);
-        memberRepository.delete(foundMember);
-    }
-
-    private Member findExistingMember(String name) {
-        return memberRepository.findByName(name)
+        return memberRepository.findByNameQuerydsl(name)
                 .orElseThrow(() -> new EntityNotFoundException("존재하지 않는 회원입니다."));
     }
 
+    public Member updateMember(String name, MemberUpdate memberUpdate) {
+        Member member = findMemberByName(name);
+
+        if (StringUtils.hasText(memberUpdate.getState())) member.setState(memberUpdate.getState());
+        if (StringUtils.hasText(memberUpdate.getCity())) member.setCity(memberUpdate.getCity());
+        if (memberUpdate.getZipCode() != null) member.setZipCode(memberUpdate.getZipCode());
+        if (memberUpdate.getHasPeanutAllergy() != null) member.setPeanutAllergy(memberUpdate.getHasPeanutAllergy());
+        if (memberUpdate.getHasEggAllergy() != null) member.setEggAllergy(memberUpdate.getHasEggAllergy());
+        if (memberUpdate.getHasDairyAllergy() != null) member.setDairyAllergy(memberUpdate.getHasDairyAllergy());
+
+        return member;
+    }
+
+    public void deleteMember(String name) {
+        Member foundMember = findMemberByName(name);
+        memberRepository.delete(foundMember);
+    }
+
     private void verifyExistingMember(String name) {
-        if (memberRepository.existsByName(name)) {
+        if (memberRepository.existsByNameQuerydsl(name)) {
             throw new RuntimeException("이미 존재하는 회원입니다.");
         }
     }

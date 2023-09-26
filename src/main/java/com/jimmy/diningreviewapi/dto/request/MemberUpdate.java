@@ -5,15 +5,15 @@ import lombok.Getter;
 import javax.validation.constraints.Positive;
 
 @Getter
-public final class MemberUpdate {
+public class MemberUpdate {
 
     private String state;
     private String city;
     @Positive
     private Integer zipCode;
 
-    private Boolean hasPeanutAllergies;
-    private Boolean hasEggAllergies;
-    private Boolean hasDairyAllergies;
+    private Boolean hasPeanutAllergy;
+    private Boolean hasEggAllergy;
+    private Boolean hasDairyAllergy;
 
 }

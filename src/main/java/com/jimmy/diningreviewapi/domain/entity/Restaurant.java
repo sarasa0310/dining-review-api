@@ -1,11 +1,12 @@
 package com.jimmy.diningreviewapi.domain.entity;
 
 import com.jimmy.diningreviewapi.domain.value.Score;
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+
+import static lombok.AccessLevel.PROTECTED;
 
 @Entity
 @Getter
@@ -14,11 +15,11 @@ import javax.persistence.*;
         @Index(columnList = "zipCode"),
         @Index(columnList = "averageScore")
 })
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor(access = PROTECTED)
 public class Restaurant {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "restaurant_id")
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
@@ -30,32 +31,28 @@ public class Restaurant {
     private Score score;
     private double averageScore;
 
-    private Restaurant(String name, Integer zipCode) {
+    public Restaurant(String name, Integer zipCode) {
         this.name = name;
         this.zipCode = zipCode;
         this.score = new Score();
     }
 
-    public static Restaurant of(String name, Integer zipCode) {
-        return new Restaurant(name, zipCode);
-    }
-
     public void updateScore(DiningReview review) {
         if (review.getFlavorScore() != null) {
-            score.setFlavor(score.getFlavor() + review.getFlavorScore());
+            score.setFlavorScore(score.getFlavorScore() + review.getFlavorScore());
         }
         if (review.getPriceScore() != null) {
-            score.setPrice(score.getPrice() + review.getPriceScore());
+            score.setPriceScore(score.getPriceScore() + review.getPriceScore());
         }
         if (review.getServiceScore() != null) {
-            score.setService(score.getService() + review.getServiceScore());
+            score.setServiceScore(score.getServiceScore() + review.getServiceScore());
         }
 
         averageScore = calculateAverageScore();
     }
 
     private double calculateAverageScore() {
-        double average = (double) (score.getFlavor() + score.getPrice() + score.getService()) / 3;
+        double average = (double) (score.getFlavorScore() + score.getPriceScore() + score.getServiceScore()) / 3;
 
         return (double) Math.round(average * 100) / 100;
     }

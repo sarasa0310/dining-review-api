@@ -42,9 +42,9 @@ class DiningReviewControllerTest {
     @DisplayName("미승인 다이닝 리뷰 제출 테스트")
     void submitDiningReview() throws Exception {
         // given
-        Member member = Member.of(
+        Member member = new Member(
                 "Willdon Piola", "New Mexico", "Albuquerque", 23625, false, false, false);
-        Restaurant restaurant = Restaurant.of(
+        Restaurant restaurant = new Restaurant(
                 "Becker-Runolfsson", 10510);
 
         DiningReviewRequest request = new DiningReviewRequest(
@@ -54,7 +54,7 @@ class DiningReviewControllerTest {
         given(diningReviewService.submitDiningReview(any(DiningReviewRequest.class)))
                 .willReturn(diningReview);
 
-        DiningReviewResponse response = DiningReviewResponse.from(diningReview);
+        DiningReviewResponse response = DiningReviewResponse.toResponse(diningReview);
 
         // when
         ResultActions actions =
@@ -67,7 +67,7 @@ class DiningReviewControllerTest {
         actions
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.memberName").value(response.getMemberName()))
-                .andExpect(jsonPath("$.restaurantName").value(response.getRestaurantName()));
+                .andExpect(jsonPath("$.restaurantName").value(response.getRestaurantId()));
     }
 
     @Test
@@ -78,9 +78,9 @@ class DiningReviewControllerTest {
 
         List<DiningReviewResponse> responses =
                 List.of(
-                        new DiningReviewResponse(1L, 1, 1, 1, null, DiningReview.Status.APPROVED, "jimmy", "red"),
-                        new DiningReviewResponse(2L, 1, 3, 5, null, DiningReview.Status.APPROVED, "kim", "blue"),
-                        new DiningReviewResponse(3L, 5, 5, 5, null, DiningReview.Status.APPROVED, "jessie", "while")
+                        new DiningReviewResponse(1L, 1, 1, 1, null, DiningReview.Status.APPROVED, "jimmy", restaurantId),
+                        new DiningReviewResponse(2L, 1, 3, 5, null, DiningReview.Status.APPROVED, "kim", restaurantId),
+                        new DiningReviewResponse(3L, 5, 5, 5, null, DiningReview.Status.APPROVED, "jessie", restaurantId)
                 );
 
         given(diningReviewService.findApprovedReviewsOfRestaurant(anyLong()))
@@ -97,9 +97,9 @@ class DiningReviewControllerTest {
         actions
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$").isArray())
-                .andExpect(jsonPath("$[0].id").value(responses.get(0).getId()))
+                .andExpect(jsonPath("$[0].id").value(responses.get(0).getDiningReviewId()))
                 .andExpect(jsonPath("$[1].memberName").value(responses.get(1).getMemberName()))
-                .andExpect(jsonPath("$[2].restaurantName").value(responses.get(2).getRestaurantName()));
+                .andExpect(jsonPath("$[2].restaurantName").value(responses.get(2).getRestaurantId()));
     }
 
 }

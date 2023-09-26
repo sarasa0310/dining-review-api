@@ -5,13 +5,12 @@ import lombok.Setter;
 
 import javax.persistence.Embeddable;
 
-@Getter
-@Setter
+@Getter @Setter
 @Embeddable
 public class Score {
 
-    private int flavor;
-    private int price;
-    private int service;
+    private int flavorScore;
+    private int priceScore;
+    private int serviceScore;
 
 }

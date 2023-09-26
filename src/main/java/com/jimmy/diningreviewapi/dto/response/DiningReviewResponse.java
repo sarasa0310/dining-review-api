@@ -2,15 +2,14 @@ package com.jimmy.diningreviewapi.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.jimmy.diningreviewapi.domain.entity.DiningReview;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
+import com.querydsl.core.annotations.QueryProjection;
+import lombok.Data;
 
-@Getter
-@AllArgsConstructor
+@Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public final class DiningReviewResponse {
+public class DiningReviewResponse {
 
-    private final Long id;
+    private final Long diningReviewId;
 
     private final Integer flavorScore;
     private final Integer priceScore;
@@ -21,18 +20,30 @@ public final class DiningReviewResponse {
     private final DiningReview.Status status;
 
     private final String memberName;
-    private final String restaurantName;
+    private final Long restaurantId;
 
-    public static DiningReviewResponse from(DiningReview entity) {
+    @QueryProjection
+    public DiningReviewResponse(Long diningReviewId, Integer flavorScore, Integer priceScore, Integer serviceScore, String comment, DiningReview.Status status, String memberName, Long restaurantId) {
+        this.diningReviewId = diningReviewId;
+        this.flavorScore = flavorScore;
+        this.priceScore = priceScore;
+        this.serviceScore = serviceScore;
+        this.comment = comment;
+        this.status = status;
+        this.memberName = memberName;
+        this.restaurantId = restaurantId;
+    }
+
+    public static DiningReviewResponse toResponse(DiningReview diningReview) {
         return new DiningReviewResponse(
-                entity.getId(),
-                entity.getFlavorScore(),
-                entity.getPriceScore(),
-                entity.getServiceScore(),
-                entity.getComment(),
-                entity.getStatus(),
-                entity.getMember().getName(),
-                entity.getRestaurant().getName());
+                diningReview.getId(),
+                diningReview.getFlavorScore(),
+                diningReview.getPriceScore(),
+                diningReview.getServiceScore(),
+                diningReview.getComment(),
+                diningReview.getStatus(),
+                diningReview.getMember().getName(),
+                diningReview.getRestaurant().getId());
     }
 
 }
