@@ -1,6 +1,7 @@
 package com.jimmy.diningreviewapi.repository.querydsl;
 
 import com.jimmy.diningreviewapi.domain.entity.DiningReview;
+import com.jimmy.diningreviewapi.dto.request.DiningReviewSearch;
 import com.jimmy.diningreviewapi.dto.response.DiningReviewResponse;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,5 +15,7 @@ public interface DiningReviewRepositoryCustom {
     List<DiningReviewResponse> findByStatusAndRestaurantIdQuerydsl(DiningReview.Status status, Long restaurantId);
 
     List<DiningReview> findByMemberIdQuerydsl(Long memberId);
+
+    Page<DiningReviewResponse> searchDiningReviews(DiningReviewSearch search, Pageable pageable);
 
 }
